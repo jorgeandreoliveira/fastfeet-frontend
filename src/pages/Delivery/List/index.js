@@ -4,8 +4,8 @@ import history from '../../../services/history';
 
 import {
   Container,
-  Content,
-  Profile,
+  Titulo,
+  Busca,
   List,
   LinkEditar,
   LinkApagar,
@@ -25,13 +25,31 @@ export default class DeliveryList extends Component {
   async componentDidMount() {
     const response = await api.get('/deliveries');
 
-    console.log('entrei');
-
     this.setState({
       deliveries: response.data,
     });
+  }
 
-    console.log(this.state.deliveries);
+  handleDelete(id) {
+    api.delete(`/delivery/${id}`);
+  }
+
+  handleChange(e) {
+    const filter = e.target.value;
+
+    if (filter === '') {
+      // this.setState({ alunos: ALUNOS_INITAL_STATE });
+      return;
+    }
+
+    const listDeliveries = this.state.deliveries.filter(
+      el => el.product.indexOf(filter) > -1
+    );
+
+    console.log(listDeliveries.length);
+
+    if (listDeliveries.length > 0)
+      this.setState({ deliveries: listDeliveries });
   }
 
   renderTableHeader() {
@@ -51,21 +69,20 @@ export default class DeliveryList extends Component {
   }
 
   renderTableData() {
-    return this.state.deliveries.map((delivery, index) => {
-      // const { id, recipient, deliveryman, city, state, status } = delivery;
-      const { id, city, state } = delivery;
+    return this.state.deliveries.map(delivery => {
       return (
-        <tr key={id}>
-          {/* <td>{recipient}</td>
-          <td>{deliveryman}</td> */}
-          <td>{city}</td>
-          <td>{state}</td>
-          {/* <td>{status}</td> */}
+        <tr key={delivery.id}>
+          <td>{delivery.id}</td>
+          <td>{delivery.Recipient.name}</td>
+          <td>{delivery.DeliveryMan.name}</td>
+          <td>{delivery.Recipient.city}</td>
+          <td>{delivery.Recipient.state}</td>
+          <td>{delivery.status}</td>
           <td>
             <LinkEditar to={`/delivery/${delivery.id}`}>Visualizar</LinkEditar>
           </td>
           <td>
-            <LinkEditar to={`/delivery/${delivery.id}`}>editar</LinkEditar>
+            <LinkEditar to={`/delivery/${delivery.id}`}>Editar</LinkEditar>
           </td>
           <td>
             <LinkApagar
@@ -80,47 +97,18 @@ export default class DeliveryList extends Component {
     });
   }
 
-  handleDelete(id) {
-    api.delete(`/delivery/${id}`);
-  }
-
-  handleChange(e) {
-    const filter = e.target.value;
-
-    if (filter === '') {
-      // this.setState({ alunos: ALUNOS_INITAL_STATE });
-      return;
-    }
-
-    const listDeliveries = this.state.deliveries.filter(
-      delivery => delivery.product.indexOf(filter) > -1
-    );
-
-    if (listDeliveries.length > 0)
-      this.setState({ deliveries: listDeliveries });
-  }
-
   render() {
     return (
       <Container>
-        <Content>
-          <nav>
-            <h1>Gerenciando encomendas</h1>
-          </nav>
-          <aside>
-            <Profile>
-              <div>
-                <button onClick={() => history.push('/CreateDelivery')}>
-                  + CADASTRAR
-                </button>
-                <input
-                  onChange={this.handleChange}
-                  placeholder="Buscar por encomendas"
-                />
-              </div>
-            </Profile>
-          </aside>
-        </Content>
+        <Titulo>
+          <h1>Gerenciando encomendas</h1>
+        </Titulo>
+        <Busca>
+          <input
+            onChange={this.handleChange}
+            placeholder="Buscar por encomendas"
+          />
+        </Busca>
         <List>
           <tbody>
             {this.renderTableHeader()}

@@ -5,24 +5,31 @@ export const Container = styled.div`
   height: 100px;
 `;
 
-export const Content = styled.div`
+export const Titulo = styled.div`
   height: 64px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-left: 120px;
 
-  nav {
-    display: flex;
-    align-items: center;
-
     h1 {
-      color: #444;
+      color: #444444;
       font-size: 24px;
-      margin-right: 10px;
-      padding-right: 50px;
     }
+  }
+`;
+
+export const Busca = styled.div`
+  height: 36px;
+  padding-left: 120px;
+  justify-content: space-between;
+
+  input {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #dddddd;
+    border-radius: 4px;
+    opacity: 1;
+    width: 230px;
+    height: 36px;
   }
 `;
 
@@ -42,7 +49,7 @@ export const Profile = styled.div`
       width: 142px;
       border: 0;
       border-radius: 4px;
-      background: #ee4d64;
+      background: #7d40e7;
       font-weight: bold;
 
       padding-right: 10px;
@@ -67,7 +74,7 @@ export const List = styled.table`
 
   th,
   td {
-    padding: 0 0 8px 150px;
+    padding: 0 0 8px 90px;
   }
   th {
     text-align: left;
