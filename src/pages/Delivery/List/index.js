@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
+import DetailDelivery from './components/DetailDelivery';
 
 import {
   Container,
   Titulo,
+  Content,
   Busca,
   List,
   LinkEditar,
@@ -16,11 +18,32 @@ export default class DeliveryList extends Component {
     super();
     this.state = {
       deliveries: [],
+      delivery: {},
+      isModalOpen: false,
     };
 
+    this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
+
+  async handleModalOpen(delivery) {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+
+    const response = await api.get(`/delivery/${delivery.id}`);
+
+    this.setState({
+      delivery: response.data,
+    });
+  }
+
+  dismissable = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
 
   async componentDidMount() {
     const response = await api.get('/deliveries');
@@ -70,6 +93,7 @@ export default class DeliveryList extends Component {
 
   renderTableData() {
     return this.state.deliveries.map(delivery => {
+      const { id } = delivery;
       return (
         <tr key={delivery.id}>
           <td>{delivery.id}</td>
@@ -79,7 +103,9 @@ export default class DeliveryList extends Component {
           <td>{delivery.Recipient.state}</td>
           <td>{delivery.status}</td>
           <td>
-            <LinkEditar to={`/delivery/${delivery.id}`}>Visualizar</LinkEditar>
+            <LinkEditar onClick={() => this.handleModalOpen({ id })}>
+              Visualizar
+            </LinkEditar>
           </td>
           <td>
             <LinkEditar to={`/delivery/${delivery.id}`}>Editar</LinkEditar>
@@ -98,23 +124,37 @@ export default class DeliveryList extends Component {
   }
 
   render() {
+    const { isModalOpen } = this.state;
+
+    let children;
+    if (isModalOpen) {
+      children = <DetailDelivery delivery={this.state.delivery} />;
+    }
     return (
       <Container>
-        <Titulo>
-          <h1>Gerenciando encomendas</h1>
-        </Titulo>
-        <Busca>
-          <input
-            onChange={this.handleChange}
-            placeholder="Buscar por encomendas"
-          />
-        </Busca>
-        <List>
-          <tbody>
-            {this.renderTableHeader()}
-            {this.renderTableData()}
-          </tbody>
-        </List>
+        <Content>
+          <Titulo>
+            <h1>Gerenciando encomendas</h1>
+          </Titulo>
+          <Busca>
+            <input
+              onChange={this.handleChange}
+              placeholder="Buscar por encomendas"
+            />
+            <button
+              type="button"
+              onClick={() => history.push('/DeliveryStore')}
+            >
+              + CADASTRAR
+            </button>
+          </Busca>
+          <List>
+            <tbody>
+              {this.renderTableHeader()}
+              {this.renderTableData()}
+            </tbody>
+          </List>
+        </Content>
       </Container>
     );
   }

@@ -2,7 +2,14 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
-  height: 100px;
+  width: 1440px;
+  height: 900px;
+`;
+
+export const Content = styled.div`
+  width: 1200px;
+  height: 100%;
+  margin-left: 120px;
 `;
 
 export const Titulo = styled.div`
@@ -22,6 +29,7 @@ export const Busca = styled.div`
   height: 36px;
   padding-left: 120px;
   justify-content: space-between;
+  display: flex;
 
   input {
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -31,56 +39,31 @@ export const Busca = styled.div`
     width: 230px;
     height: 36px;
   }
-`;
 
-export const Profile = styled.div`
-  display: flex;
-  margin-left: 10px;
-  padding-left: 10px;
-  align-items: center;
-  justify-content: center;
-
-  div {
-    text-align: right;
+  button {
+    color: #ffffff;
     margin-right: 100px;
-
-    button {
-      height: 36px;
-      width: 142px;
-      border: 0;
-      border-radius: 4px;
-      background: #7d40e7;
-      font-weight: bold;
-
-      padding-right: 10px;
-      color: #fff;
-    }
-
-    input {
-      width: 230px;
-      height: 36px;
-      padding-left: 10px;
-      margin-left: 10px;
-    }
+    background: #7d40e7 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+    width: 142px;
+    height: 36px;
   }
 `;
 
-export const TdCenter = styled.td`
-  text-align: center;
-`;
-
 export const List = styled.table`
-  background: #fff;
-
+  background: #f5f5f5;
+  margin-top: 10px;
   th,
   td {
-    padding: 0 0 8px 90px;
+    padding: 0 0 0 90px;
   }
   th {
     text-align: left;
   }
   td {
     font-size: 16px;
+    background-color: #ffffff;
   }
 `;
 export const LinkEditar = styled(Link)`
