@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Router, Route, browserHistory, IndexRoute} from 'react-router';
 import { Form, Input, Select } from '@rocketseat/unform';
 //import * as Yup from 'yup';
 import api from '../../../services/api';
@@ -95,7 +96,7 @@ export default class DeliveryStore extends Component {
         <Form
           /* schema={schema} */
           onSubmit={this.handleSubmit}
-          /* initialData={this.state.delivery} */
+          initialData={this.state.delivery}
         >
           <Content>
             <h1>Edição de encomendas</h1>
@@ -112,7 +113,7 @@ export default class DeliveryStore extends Component {
           </Content>
           <List>
             <h1>Destinatário</h1>
-            <Select name="recipient_id" options={this.state.recipients} />
+            <Select name="recipient_id" options={this.state.recipients}/>
             <h1>Entregador</h1>
             <Select name="deliveryman_id" options={this.state.deliveryMen} />
             <div>
