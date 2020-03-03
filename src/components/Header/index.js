@@ -11,10 +11,10 @@ export default function Header() {
         <nav>
           {/* <img src={Logo} alt="Logo" /> */}
           <h1>FASTFEET</h1>
-          <Link to="/Encomendas">ENCOMENDAS</Link>
-          <Link to="/Entregadores">ENTREGADORES</Link>
-          <Link to="/Destinatios">DESTINATÁRIOS</Link>
-          <Link to="/Problemas">PROBLEMAS</Link>
+          <Link to="/DeliveryList">ENCOMENDAS</Link>
+          <Link to="/DeliveryManList">ENTREGADORES</Link>
+          <Link to="/RecipientList">DESTINATÁRIOS</Link>
+          <Link to="/DeliveryProblemList">PROBLEMAS</Link>
         </nav>
         <aside>
           <Profile>
