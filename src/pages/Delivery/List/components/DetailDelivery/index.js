@@ -4,12 +4,11 @@ import { Container, Header } from './styles';
 export default class DetailDelivery extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      value: '',
-    };
+    //console.log(props);
+  }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  handleClose() {
+    //this.props.visible = false;
   }
 
   render() {
@@ -18,20 +17,21 @@ export default class DetailDelivery extends Component {
         <Container>
           <Header>Informações da encomenda</Header>
           <label>
-            `${this.props.delivery.question.street}, $
-            {this.props.delivery.question.number}`
+            {this.props.delivery.Recipient.street},
+            {this.props.delivery.Recipient.number}
           </label>
           <label>
-            `${this.props.delivery.question.city} - $
-            {this.props.delivery.question.state}`
+            {this.props.delivery.Recipient.city} -
+            {this.props.delivery.Recipient.state}
           </label>
-          <label>{this.props.delivery.question.zipcode}</label>
+          <label>{this.props.delivery.Recipient.zipcode}</label>
           <Header>Datas</Header>
           <Header>Retirada</Header>
-          <label>{this.props.delivery.question.start_date}</label>
+          <label>{this.props.delivery.start_date}</label>
           <Header>Entrega</Header>
-          <label>{this.props.delivery.question.end_date}</label>
+          <label>{this.props.delivery.end_date}</label>
           <Header>Assinatura do destinatário</Header>
+          <button type="submit" onClick={() => this.handleClose()}></button>
         </Container>
       </>
     );

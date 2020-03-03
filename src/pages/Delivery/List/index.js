@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
+import ModalSetup from '../../../components/Modal';
 import DetailDelivery from './components/DetailDelivery';
 
 import {
@@ -18,8 +19,8 @@ export default class DeliveryList extends Component {
     super();
     this.state = {
       deliveries: [],
-      delivery: {},
       isModalOpen: false,
+      delivery: {},
     };
 
     this.handleModalOpen = this.handleModalOpen.bind(this);
@@ -27,23 +28,19 @@ export default class DeliveryList extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
-  async handleModalOpen(delivery) {
-    this.setState({
-      isModalOpen: !this.state.isModalOpen,
-    });
-
-    const response = await api.get(`/delivery/${delivery.id}`);
-
-    this.setState({
-      delivery: response.data,
-    });
-  }
-
   dismissable = () => {
+    console.log('entrei');
     this.setState({
       isModalOpen: false,
     });
   };
+
+  handleModalOpen(selectedDelivery) {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+      delivery: selectedDelivery.delivery,
+    });
+  }
 
   async componentDidMount() {
     const response = await api.get('/deliveries');
@@ -69,8 +66,6 @@ export default class DeliveryList extends Component {
       el => el.product.indexOf(filter) > -1
     );
 
-    console.log(listDeliveries.length);
-
     if (listDeliveries.length > 0)
       this.setState({ deliveries: listDeliveries });
   }
@@ -91,30 +86,32 @@ export default class DeliveryList extends Component {
     );
   }
 
-  renderTableData() {
+  renderTableData(isModalOpen, children) {
     return this.state.deliveries.map(delivery => {
       const { id } = delivery;
       return (
-        <tr key={delivery.id}>
-          <td>{delivery.id}</td>
+        <tr key={id}>
+          <td>{id}</td>
           <td>{delivery.Recipient.name}</td>
           <td>{delivery.DeliveryMan.name}</td>
           <td>{delivery.Recipient.city}</td>
           <td>{delivery.Recipient.state}</td>
           <td>{delivery.status}</td>
           <td>
-            <LinkEditar onClick={() => this.handleModalOpen({ id })}>
+            <button onClick={() => this.handleModalOpen({ delivery })}>
               Visualizar
-            </LinkEditar>
+            </button>
+            <ModalSetup
+              visible={isModalOpen}
+              dismiss={this.dissmissable}
+              children={children}
+            />
           </td>
           <td>
-            <LinkEditar to={`/delivery/${delivery.id}`}>Editar</LinkEditar>
+            <LinkEditar to={`/DeliveryStore/${id}`}>Editar</LinkEditar>
           </td>
           <td>
-            <LinkApagar
-              to=""
-              onClick={() => this.handleDelete(`${delivery.id}`)}
-            >
+            <LinkApagar to="" onClick={() => this.handleDelete(`${id}`)}>
               Excluir
             </LinkApagar>
           </td>
@@ -125,7 +122,6 @@ export default class DeliveryList extends Component {
 
   render() {
     const { isModalOpen } = this.state;
-
     let children;
     if (isModalOpen) {
       children = <DetailDelivery delivery={this.state.delivery} />;
@@ -149,10 +145,8 @@ export default class DeliveryList extends Component {
             </button>
           </Busca>
           <List>
-            <tbody>
-              {this.renderTableHeader()}
-              {this.renderTableData()}
-            </tbody>
+            {this.renderTableHeader()}
+            {this.renderTableData(this.state.isModalOpen, children)}
           </List>
         </Content>
       </Container>

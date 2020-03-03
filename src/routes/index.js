@@ -17,6 +17,7 @@ export default function Routes() {
       <Route path="/" exact component={Login} />
       <Route path="/Login" component={Login} />
       <Route path="/DeliveryList" component={DeliveryList} isPrivate />
+<<<<<<< HEAD
       <Route path="/DeliveryStore" component={DeliveryStore} isPrivate />
       <Route path="/RecipientList" component={RecipientList} isPrivate />
       <Route path="/RecipientStore" component={RecipientStore} isPrivate />
@@ -27,6 +28,9 @@ export default function Routes() {
         component={DeliveryProblemList}
         isPrivate
       />
+=======
+      <Route path="/DeliveryStore/:id" component={DeliveryStore} isPrivate />
+>>>>>>> dbeba8b883a5d1d9256aa8fac3998c751355f597
     </Switch>
   );
 }
