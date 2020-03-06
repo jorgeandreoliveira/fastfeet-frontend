@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
+import Icon from '../../assets/search.png';
 
 import {
   Container,
@@ -69,7 +70,7 @@ export default class RecipientList extends Component {
       const { id } = recipient;
       return (
         <tr key={id}>
-          <td>{recipient.id}</td>
+          <td>{id < 10 ? `#0${id}` : {id}}</td>
           <td>{recipient.name}</td>
           <td>
             {recipient.street},{recipient.city} - {recipient.state}
@@ -95,10 +96,13 @@ export default class RecipientList extends Component {
             <h1>Gerenciando destinatários</h1>
           </Titulo>
           <Busca>
-            <input
-              onChange={this.handleChange}
-              placeholder="Buscar por destinatários"
-            />
+            <div style={{ border: '0px', position: 'relative' }}>
+              <img src={Icon} alt="Search" />
+              <input
+                onChange={this.handleChange}
+                placeholder="Buscar por destinatários"
+              />
+            </div>
             <button
               type="button"
               onClick={() => history.push('/RecipientStore')}

@@ -24,22 +24,27 @@ export const Titulo = styled.div`
 `;
 
 export const Busca = styled.div`
-  height: 36px;
   justify-content: space-between;
   display: flex;
   align-items: center;
+
   input {
-    background: #ffffff 0% 0% no-repeat padding-box;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    opacity: 1;
+    border: 0px;
+    padding-left: 30px;
     width: 230px;
     height: 36px;
   }
 
+  img {
+    position: absolute;
+    top: 5px;
+    left: 2px;
+    width: 24px;
+  }
+
   button {
     color: #ffffff;
-    margin-right: 100px;
+    margin-right: 20px;
     background: #7d40e7 0% 0% no-repeat padding-box;
     border-radius: 4px;
     opacity: 1;
@@ -50,29 +55,29 @@ export const Busca = styled.div`
 
 export const List = styled.table`
   background: #f5f5f5;
-  margin-top: 10px;
-  background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 4px;
   opacity: 1;
   width: 1200px;
   border-collapse: separate;
-  border-spacing: 0 5px;
+  border-spacing: 0 21px;
   th {
-    background: #f5f5f5;
-    height: 57px;
+    height: 14px;
     text-align: left;
-    letter-spacing: 0;
-    color: #444444;
-    opacity: 1;
+    color: #444;
   }
   td {
+    background: #ffffff 0% 0% no-repeat padding-box;
     height: 57px;
     text-align: left;
     letter-spacing: 0;
-    color: #666666;
     opacity: 1;
+    border-radius: 4px;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
   }
 `;
+
 export const LinkEditar = styled(Link)`
   font-size: 15px;
   color: #4d85ee;

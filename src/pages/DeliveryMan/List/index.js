@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
+import Icon from '../../assets/search.png';
 
 import {
   Container,
@@ -70,7 +71,7 @@ export default class DeliveryManList extends Component {
       const { id } = deliveryMan;
       return (
         <tr key={id}>
-          <td>{deliveryMan.id}</td>
+          <td>{id < 10 ? `#0${id}` : {id}}</td>
           <td>{deliveryMan.avatar_id}</td>
           <td>{deliveryMan.name}</td>
           <td>{deliveryMan.email}</td>
@@ -98,10 +99,13 @@ export default class DeliveryManList extends Component {
             <h1>Gerenciando entregadores</h1>
           </Titulo>
           <Busca>
-            <input
-              onChange={this.handleChange}
-              placeholder="Buscar por entregadores"
-            />
+            <div style={{ border: '0px', position: 'relative' }}>
+              <img src={Icon} alt="Search" />
+              <input
+                onChange={this.handleChange}
+                placeholder="Buscar por entregadores"
+              />
+            </div>
             <button
               type="button"
               onClick={() => history.push('/DeliveryManStore')}

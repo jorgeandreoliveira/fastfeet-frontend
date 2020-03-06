@@ -16,8 +16,8 @@ export const Content = styled.div`
 
   img {
     margin-top: 30px;
-    height: 100px;
-    width: 140px;
+    height: 44px;
+    width: 260px;
   }
 
   h1 {
@@ -30,9 +30,10 @@ export const Content = styled.div`
 
   h2 {
     text-align: left;
-    font-size: 12px;
+    font-size: 14px;
     padding-bottom: 5px;
     font-family: Roboto, sans-serif;
+    font-weight: bold;
     padding-left: 20px;
     color: #444;
   }
@@ -51,15 +52,7 @@ export const Content = styled.div`
       width: 300px;
       margin: 3px 20px 10px;
       padding-left: 10px;
-    }
-
-    span {
-      padding-bottom: 10px;
-      align-self: flex-start;
-      padding-left: 20px;
-      text-align: left;
-      color: brown;
-      font-weight: bold;
+      color: #999;
     }
 
     button {

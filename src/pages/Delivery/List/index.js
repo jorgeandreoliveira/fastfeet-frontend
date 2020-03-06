@@ -3,6 +3,7 @@ import api from '../../../services/api';
 import history from '../../../services/history';
 import ModalSetup from '../../../components/Modal';
 import DetailDelivery from './components/DetailDelivery';
+import Icon from '../../assets/search.png';
 
 import {
   Container,
@@ -13,6 +14,8 @@ import {
   LinkEditar,
   LinkApagar,
 } from './styles';
+
+import Menu from '../../Menu';
 
 export default class DeliveryList extends Component {
   constructor() {
@@ -26,10 +29,11 @@ export default class DeliveryList extends Component {
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    // this.handleClick = this.handleClick.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
   }
 
   dismissable = () => {
-    console.log('entrei');
     this.setState({
       isModalOpen: false,
     });
@@ -79,6 +83,7 @@ export default class DeliveryList extends Component {
         <th>Cidade</th>
         <th>Estado</th>
         <th>Status</th>
+        <th>Ações</th>
         <th>Visualizar</th>
         <th>Editar</th>
         <th>Excluir</th>
@@ -91,14 +96,20 @@ export default class DeliveryList extends Component {
       const { id } = delivery;
       return (
         <tr key={id}>
-          <td>{id}</td>
+          <td>{id < 10 ? `#0${id}` : { id }}</td>
           <td>{delivery.Recipient.name}</td>
           <td>{delivery.DeliveryMan.name}</td>
           <td>{delivery.Recipient.city}</td>
           <td>{delivery.Recipient.state}</td>
           <td>{delivery.status}</td>
           <td>
-            <button onClick={() => this.handleModalOpen({ delivery })}>
+            <Menu id={id} />
+          </td>
+          <td>
+            <button
+              type="button"
+              onClick={() => this.handleModalOpen({ delivery })}
+            >
               Visualizar
             </button>
             <ModalSetup
@@ -133,10 +144,13 @@ export default class DeliveryList extends Component {
             <h1>Gerenciando encomendas</h1>
           </Titulo>
           <Busca>
-            <input
-              onChange={this.handleChange}
-              placeholder="Buscar por encomendas"
-            />
+            <div style={{ border: '0px', position: 'relative' }}>
+              <img src={Icon} alt="Search" />
+              <input
+                onChange={this.handleChange}
+                placeholder="Buscar por encomendas"
+              />
+            </div>
             <button
               type="button"
               onClick={() => history.push('/DeliveryStore')}

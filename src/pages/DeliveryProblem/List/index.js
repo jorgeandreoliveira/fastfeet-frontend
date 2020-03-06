@@ -26,7 +26,6 @@ export default class DeliveryProblemList extends Component {
 
   async componentDidMount() {
     const response = await api.get('/deliveryproblem');
-    console.log(response.data);
     this.setState({
       deliveryProblems: response.data,
     });
@@ -68,9 +67,10 @@ export default class DeliveryProblemList extends Component {
   renderTableData() {
     return this.state.deliveryProblems.map(deliveryProblem => {
       const { id } = deliveryProblem;
+      const { delivery_id } = deliveryProblem;
       return (
         <tr key={id}>
-          <td>{deliveryProblem.delivery_id}</td>
+          <td>{delivery_id < 10 ? `#0${delivery_id}` : {delivery_id}}</td>
           <td>{deliveryProblem.description}</td>
           <td>
             <LinkEditar onClick={() => this.handleModalOpen({ id })}>

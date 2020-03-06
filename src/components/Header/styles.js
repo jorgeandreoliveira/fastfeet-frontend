@@ -38,12 +38,15 @@ export const Content = styled.div`
       padding-left: 20px;
     }
   }
+`;
 
-  /* aside {
-    display: flex;
-    align-items: center;
-
-  }*/
+export const Separator = styled.span`
+  top: 16px;
+  left: 195px;
+  width: 1px;
+  height: 32px;
+  background: #dddddd 0% 0% no-repeat padding-box;
+  opacity: 1;
 `;
 
 export const Profile = styled.div`
