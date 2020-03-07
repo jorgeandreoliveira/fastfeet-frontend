@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import { Router, Route, browserHistory, IndexRoute} from 'react-router';
 import { Form, Input, Select } from '@rocketseat/unform';
-//import * as Yup from 'yup';
-import api from '../../../services/api';
+import * as Yup from 'yup';
 import history from '../../../services/history';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import api from '../../../services/api';
 
 import {
   Container,
@@ -15,18 +11,17 @@ import {
   ButtonVoltar,
   ButtonSalvar,
   List,
+  Wrapper,
+  Left,
+  Right,
+  Product,
 } from './styles';
 
-/* const schema = Yup.object().shape({
-  nome: Yup.string().required('Nome é obrigatório'),
-  email: Yup.string()
-    .email('Informe um e-mail válido')
-    .required('e-mail é obrigatório'),
-  idade: Yup.number()
-    .integer()
-    .required('Idade é obrigatória')
-    .positive('Idade inválida'),
-}); */
+const schema = Yup.object().shape({
+  recipient_id: Yup.string().required('Destinatário é obrigatório'),
+  deliveryman_id: Yup.string().required('Entregador é obrigatório'),
+  product: Yup.string().required('Nome do produto é obrigatório'),
+});
 
 export default class DeliveryStore extends Component {
   constructor() {
@@ -83,7 +78,7 @@ export default class DeliveryStore extends Component {
         product,
       });
     } else {
-      await api.post("/delivery", {
+      await api.post('/delivery', {
         recipient_id,
         deliveryman_id,
         product,
@@ -97,7 +92,7 @@ export default class DeliveryStore extends Component {
     return (
       <Container>
         <Form
-          /* schema={schema} */
+          schema={schema}
           onSubmit={this.handleSubmit}
           initialData={this.state.delivery}
         >
@@ -107,7 +102,7 @@ export default class DeliveryStore extends Component {
               <Profile>
                 <div>
                   <ButtonVoltar onClick={() => history.push('/DeliveryList')}>
-                    Voltar
+                    {'< Voltar'}
                   </ButtonVoltar>
                   <ButtonSalvar type="submit">Salvar</ButtonSalvar>
                 </div>
@@ -115,13 +110,22 @@ export default class DeliveryStore extends Component {
             </aside>
           </Content>
           <List>
-            <h1>Destinatário</h1>
-            <Select name="recipient_id" options={this.state.recipients}/>
-            <h1>Entregador</h1>
-            <Select name="deliveryman_id" options={this.state.deliveryMen} />
-            <div>
+            <Wrapper>
+              <Left>
+                <h1>Destinatário</h1>
+                <Select name="recipient_id" options={this.state.recipients} />
+              </Left>
+              <Right>
+                <h1>Entregador</h1>
+                <Select
+                  name="deliveryman_id"
+                  options={this.state.deliveryMen}
+                />
+              </Right>
+            </Wrapper>
+            <Product>
               <h1>Nome do produto</h1>
-            </div>
+            </Product>
             <div>
               <Input name="product" />
             </div>

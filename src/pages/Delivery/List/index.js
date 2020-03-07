@@ -5,17 +5,11 @@ import ModalSetup from '../../../components/Modal';
 import DetailDelivery from './components/DetailDelivery';
 import Icon from '../../assets/search.png';
 
-import {
-  Container,
-  Titulo,
-  Content,
-  Busca,
-  List,
-  LinkEditar,
-  LinkApagar,
-} from './styles';
+import { Container, Titulo, Content, Busca, List } from './styles';
 
 import Menu from '../../Menu';
+
+let DELIVERIES_INITAL_STATE = [];
 
 export default class DeliveryList extends Component {
   constructor() {
@@ -28,9 +22,16 @@ export default class DeliveryList extends Component {
 
     this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    // this.handleClick = this.handleClick.bind(this);
-    // this.handleClose = this.handleClose.bind(this);
+  }
+
+  async componentDidMount() {
+    const response = await api.get('/deliveries');
+
+    this.setState({
+      deliveries: response.data,
+    });
+
+    DELIVERIES_INITAL_STATE = this.state.deliveries;
   }
 
   dismissable = () => {
@@ -46,32 +47,23 @@ export default class DeliveryList extends Component {
     });
   }
 
-  async componentDidMount() {
-    const response = await api.get('/deliveries');
-
-    this.setState({
-      deliveries: response.data,
-    });
-  }
-
-  handleDelete(id) {
-    api.delete(`/delivery/${id}`);
-  }
-
   handleChange(e) {
     const filter = e.target.value;
 
     if (filter === '') {
-      // this.setState({ alunos: ALUNOS_INITAL_STATE });
+      this.setState({ deliveries: DELIVERIES_INITAL_STATE });
       return;
     }
 
     const listDeliveries = this.state.deliveries.filter(
-      el => el.product.indexOf(filter) > -1
+      delivery => delivery.product.indexOf(filter) > -1
     );
+
+    console.log(listDeliveries);
 
     if (listDeliveries.length > 0)
       this.setState({ deliveries: listDeliveries });
+    else this.setState({ deliveries: DELIVERIES_INITAL_STATE });
   }
 
   renderTableHeader() {
@@ -85,8 +77,6 @@ export default class DeliveryList extends Component {
         <th>Status</th>
         <th>Ações</th>
         <th>Visualizar</th>
-        <th>Editar</th>
-        <th>Excluir</th>
       </tr>
     );
   }
@@ -118,14 +108,6 @@ export default class DeliveryList extends Component {
               children={children}
             />
           </td>
-          <td>
-            <LinkEditar to={`/DeliveryStore/${id}`}>Editar</LinkEditar>
-          </td>
-          <td>
-            <LinkApagar to="" onClick={() => this.handleDelete(`${id}`)}>
-              Excluir
-            </LinkApagar>
-          </td>
         </tr>
       );
     });
@@ -145,7 +127,7 @@ export default class DeliveryList extends Component {
           </Titulo>
           <Busca>
             <div style={{ border: '0px', position: 'relative' }}>
-              <img src={Icon} alt="Search" />
+              <img src={Icon} alt="Pesquisar" />
               <input
                 onChange={this.handleChange}
                 placeholder="Buscar por encomendas"

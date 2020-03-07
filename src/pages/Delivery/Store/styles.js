@@ -32,7 +32,7 @@ export const Profile = styled.div`
 `;
 
 export const ButtonVoltar = styled.button`
-  background: #ddd;
+  background: #ccc;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
@@ -59,44 +59,40 @@ export const List = styled.div`
   border-radius: 4px;
   margin-left: 270px;
   margin-right: 270px;
+
+
   h1 {
     font-family: Roboto;
-    font-style: normal;
     font-weight: bold;
     font-size: 14px;
     line-height: 16px;
     color: #444;
-    padding: 30px 0 5px 30px;
+    padding: 30px 0px 5px 30px;
   }
   select {
     background: #fff;
     border: 1px solid #dddddd;
     height: 45px;
-    width: 840px;
+    width: 405px;
     border-radius: 4px;
     margin-left: 30px;
+    text-align: left;
+    letter-spacing: 0;
+    color: #999999;
+    opacity: 1;
   }
-  div {
-    display: flex;
-    select {
-      background: #fff;
-      border: 3px solid #dddddd;
-
-      height: 45px;
-      border-radius: 4px;
-    }
-
-    h1 {
-      margin-right: 100px;
-    }
     input {
       height: 45px;
+      width: 840px;
       background: #ffffff;
       border: 1px solid #dddddd;
       box-sizing: border-box;
       border-radius: 4px;
-      justify-content: space-between;
+      font-size: 16px;
       margin-left: 30px;
+      letter-spacing: 0;
+      color: #999999;
+      opacity: 1;
     }
     .disabled {
       background: #f5f5f5;
@@ -104,12 +100,25 @@ export const List = styled.div`
   }
 `;
 
-export const Nome = styled(Input)`
-  width: 840px;
-  height: 45px;
-  background: #ffffff;
-  border: 1px solid #dddddd;
-  box-sizing: border-box;
-  border-radius: 4px;
-  margin-left: 30px;
+export const Wrapper = styled.div`
+  width: 900px;
+`;
+
+export const Left = styled.div`
+  float: left;
+  width: 435px;
+`;
+
+export const Right = styled.div`
+  float: right;
+  width: 465px;
+`;
+
+export const Product = styled.div`
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #444;
+  padding: 80px 0px 0px 0px;
 `;

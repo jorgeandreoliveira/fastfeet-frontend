@@ -2,16 +2,29 @@ import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
-import VisibilityIcon from '@material-ui/icons/Visibility';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { MoreButton } from './styles';
+import history from '../../services/history';
+import api from '../../services/api';
+import {
+  MoreButton,
+  CustomVisibilityIcon,
+  CustomEditIcon,
+  CustomDeleteIcon,
+} from './styles';
 
 export default function SimpleMenu(props) {
+  // this.handleDelete = this.handleDelete.bind(this);
+
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleDelete = id => {
+    api.delete(`/delivery/${id}`);
+    window.location.reload(false);
   };
 
   const handleClose = () => {
@@ -36,14 +49,30 @@ export default function SimpleMenu(props) {
       >
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
-            <VisibilityIcon fontSize="small" />
+            <CustomVisibilityIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Sent mail" />
+          <ListItemText primary="Visualizar" />
         </MenuItem>
-        <MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <CustomEditIcon fontSize="small" />
+          </ListItemIcon>
           <Link to={`/DeliveryStore/${props.id}`}>Editar</Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>Excluir</MenuItem>
+        <MenuItem onClick={handleClose}>
+          <ListItemIcon>
+            <CustomDeleteIcon fontSize="small" />
+          </ListItemIcon>
+          <Link
+            to=""
+            onClick={() => {
+              if (window.confirm('Are you sure you wish to delete this item?'))
+                handleDelete(`${props.id}`);
+            }}
+          >
+            Excluir
+          </Link>
+        </MenuItem>
       </Menu>
     </div>
   );
