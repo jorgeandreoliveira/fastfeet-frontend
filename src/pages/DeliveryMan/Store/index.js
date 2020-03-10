@@ -83,12 +83,14 @@ export default class DeliveryManStore extends Component {
           /* initialData={this.state.recipient} */
         >
           <Content>
-            <h1>Edição de destinatário</h1>
+            <h1>Edição de entregadores</h1>
             <aside>
               <Profile>
                 <div>
-                  <ButtonVoltar onClick={() => history.push('/RecipientList')}>
-                    Voltar
+                  <ButtonVoltar
+                    onClick={() => history.push('/DeliveryManList')}
+                  >
+                    {'< Voltar'}
                   </ButtonVoltar>
                   <ButtonSalvar type="submit">Salvar</ButtonSalvar>
                 </div>

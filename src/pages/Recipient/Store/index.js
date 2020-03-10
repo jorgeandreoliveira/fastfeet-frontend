@@ -98,7 +98,7 @@ export default class RecipientStore extends Component {
               <Profile>
                 <div>
                   <ButtonVoltar onClick={() => history.push('/RecipientList')}>
-                    Voltar
+                    {'< Voltar'}
                   </ButtonVoltar>
                   <ButtonSalvar type="submit">Salvar</ButtonSalvar>
                 </div>

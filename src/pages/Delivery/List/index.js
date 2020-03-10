@@ -59,8 +59,6 @@ export default class DeliveryList extends Component {
       delivery => delivery.product.indexOf(filter) > -1
     );
 
-    console.log(listDeliveries);
-
     if (listDeliveries.length > 0)
       this.setState({ deliveries: listDeliveries });
     else this.setState({ deliveries: DELIVERIES_INITAL_STATE });

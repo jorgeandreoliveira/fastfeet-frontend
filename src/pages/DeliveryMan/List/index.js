@@ -2,27 +2,23 @@ import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
 import Icon from '../../assets/search.png';
+import Menu from './components/Menu';
 
-import {
-  Container,
-  Titulo,
-  Content,
-  Busca,
-  List,
-  LinkEditar,
-  LinkApagar,
-} from './styles';
+import { Container, Titulo, Content, Busca, List } from './styles';
+
+let DELIVERYMEN_INITAL_STATE = [];
 
 export default class DeliveryManList extends Component {
   constructor() {
     super();
     this.state = {
       deliverymen: [],
+      isModalOpen: false,
       deliveryman: {},
     };
 
+    this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   async componentDidMount() {
@@ -31,17 +27,28 @@ export default class DeliveryManList extends Component {
     this.setState({
       deliverymen: response.data,
     });
+
+    DELIVERYMEN_INITAL_STATE = this.state.deliverymen;
   }
 
-  handleDelete(id) {
-    api.delete(`/deliveryman/${id}`);
+  dismissable = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
+
+  handleModalOpen(selectedDeliveryMan) {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+      deliveryman: selectedDeliveryMan.deliveryMan,
+    });
   }
 
   handleChange(e) {
     const filter = e.target.value;
 
     if (filter === '') {
-      // this.setState({ alunos: ALUNOS_INITAL_STATE });
+      this.setState({ deliverymen: DELIVERYMEN_INITAL_STATE });
       return;
     }
 
@@ -60,8 +67,7 @@ export default class DeliveryManList extends Component {
         <th>Foto</th>
         <th>Nome</th>
         <th>Email</th>
-        <th>Editar</th>
-        <th>Excluir</th>
+        <th>Ações</th>
       </tr>
     );
   }
@@ -71,20 +77,12 @@ export default class DeliveryManList extends Component {
       const { id } = deliveryMan;
       return (
         <tr key={id}>
-          <td>{id < 10 ? `#0${id}` : {id}}</td>
+          <td>{id < 10 ? `#0${id}` : { id }}</td>
           <td>{deliveryMan.avatar_id}</td>
           <td>{deliveryMan.name}</td>
           <td>{deliveryMan.email}</td>
           <td>
-            <LinkEditar to={`/deliveryman/${id}`}>Editar</LinkEditar>
-          </td>
-          <td>
-            <LinkApagar
-              to=""
-              onClickvdeliveryMan={() => this.handleDelete(`${deliveryMan.id}`)}
-            >
-              Excluir
-            </LinkApagar>
+            <Menu id={id} />
           </td>
         </tr>
       );

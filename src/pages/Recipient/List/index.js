@@ -3,26 +3,23 @@ import api from '../../../services/api';
 import history from '../../../services/history';
 import Icon from '../../assets/search.png';
 
-import {
-  Container,
-  Titulo,
-  Content,
-  Busca,
-  List,
-  LinkEditar,
-  LinkApagar,
-} from './styles';
+import { Container, Titulo, Content, Busca, List } from './styles';
+
+import Menu from '../components/Menu';
+
+let RECIPIENT_INITAL_STATE = [];
 
 export default class RecipientList extends Component {
   constructor() {
     super();
     this.state = {
       recipients: [],
+      isModalOpen: false,
       recipient: {},
     };
 
+    this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   async componentDidMount() {
@@ -31,17 +28,28 @@ export default class RecipientList extends Component {
     this.setState({
       recipients: response.data,
     });
+
+    RECIPIENT_INITAL_STATE = this.state.recipients;
   }
 
-  handleDelete(id) {
-    api.delete(`/recipient/${id}`);
+  dismissable = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+  };
+
+  handleModalOpen(selectedRecipient) {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+      recipient: selectedRecipient.recipient,
+    });
   }
 
   handleChange(e) {
     const filter = e.target.value;
 
     if (filter === '') {
-      // this.setState({ alunos: ALUNOS_INITAL_STATE });
+      this.setState({ recipients: RECIPIENT_INITAL_STATE });
       return;
     }
 
@@ -59,8 +67,7 @@ export default class RecipientList extends Component {
         <th>ID</th>
         <th>Nome</th>
         <th>Endereço</th>
-        <th>Editar</th>
-        <th>Excluir</th>
+        <th>Ações</th>
       </tr>
     );
   }
@@ -70,18 +77,13 @@ export default class RecipientList extends Component {
       const { id } = recipient;
       return (
         <tr key={id}>
-          <td>{id < 10 ? `#0${id}` : {id}}</td>
+          <td>{id < 10 ? `#0${id}` : { id }}</td>
           <td>{recipient.name}</td>
           <td>
             {recipient.street},{recipient.city} - {recipient.state}
           </td>
           <td>
-            <LinkEditar to={`/recipient/${id}`}>Editar</LinkEditar>
-          </td>
-          <td>
-            <LinkApagar to="" onClick={() => this.handleDelete(`${id}`)}>
-              Excluir
-            </LinkApagar>
+            <Menu id={id} />
           </td>
         </tr>
       );

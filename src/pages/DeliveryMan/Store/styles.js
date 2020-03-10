@@ -32,7 +32,7 @@ export const Profile = styled.div`
 `;
 
 export const ButtonVoltar = styled.button`
-  background: #ddd;
+  background: #ccc;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
@@ -59,6 +59,7 @@ export const List = styled.div`
   border-radius: 4px;
   margin-left: 270px;
   margin-right: 270px;
+
   h1 {
     font-family: Roboto;
     font-style: normal;
@@ -68,28 +69,9 @@ export const List = styled.div`
     color: #444;
     padding: 30px 0 5px 30px;
   }
-  select {
-    background: #fff;
-    border: 1px solid #dddddd;
-    height: 45px;
-    width: 840px;
-    border-radius: 4px;
-    margin-left: 30px;
-  }
-  div {
-    display: flex;
-    select {
-      background: #fff;
-      border: 3px solid #dddddd;
 
-      height: 45px;
-      border-radius: 4px;
-    }
-
-    h1 {
-      margin-right: 100px;
-    }
     input {
+      width: 840px;
       height: 45px;
       background: #ffffff;
       border: 1px solid #dddddd;

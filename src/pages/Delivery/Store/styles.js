@@ -60,7 +60,6 @@ export const List = styled.div`
   margin-left: 270px;
   margin-right: 270px;
 
-
   h1 {
     font-family: Roboto;
     font-weight: bold;

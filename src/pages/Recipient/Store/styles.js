@@ -32,7 +32,7 @@ export const Profile = styled.div`
 `;
 
 export const ButtonVoltar = styled.button`
-  background: #ddd;
+  background: #ccc;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
