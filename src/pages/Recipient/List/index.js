@@ -80,7 +80,8 @@ export default class RecipientList extends Component {
           <td>{id < 10 ? `#0${id}` : { id }}</td>
           <td>{recipient.name}</td>
           <td>
-            {recipient.street},{recipient.city} - {recipient.state}
+            {recipient.street}, {recipient.number}, {recipient.city} -{' '}
+            {recipient.state}
           </td>
           <td>
             <Menu id={id} />

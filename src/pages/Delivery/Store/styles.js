@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Input } from '@rocketseat/unform';
 
 export const Container = styled.div`
   height: 100px;

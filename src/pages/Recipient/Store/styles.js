@@ -68,27 +68,6 @@ export const List = styled.div`
     color: #444;
     padding: 30px 0 5px 30px;
   }
-  select {
-    background: #fff;
-    border: 1px solid #dddddd;
-    height: 45px;
-    width: 840px;
-    border-radius: 4px;
-    margin-left: 30px;
-  }
-  div {
-    display: flex;
-    select {
-      background: #fff;
-      border: 3px solid #dddddd;
-
-      height: 45px;
-      border-radius: 4px;
-    }
-
-    h1 {
-      margin-right: 100px;
-    }
     input {
       height: 45px;
       background: #ffffff;
@@ -104,7 +83,7 @@ export const List = styled.div`
   }
 `;
 
-export const Nome = styled(Input)`
+export const InputName = styled(Input)`
   width: 840px;
   height: 45px;
   background: #ffffff;
@@ -112,4 +91,104 @@ export const Nome = styled(Input)`
   box-sizing: border-box;
   border-radius: 4px;
   margin-left: 30px;
+`;
+
+export const Wrapper = styled.div`
+  width: 900px;
+  justify-content: space-between;
+`;
+
+export const InputStreet = styled(Input)`
+  width: 518px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const InputNumber = styled(Input)`
+  width: 150px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const InputComplement = styled(Input)`
+  width: 140px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const InputCity = styled(Input)`
+  width: 269px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const InputState = styled(Input)`
+  width: 269px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const InputZipCode = styled(Input)`
+  width: 269px;
+  height: 45px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+  border-radius: 4px;
+  margin-left: 30px;
+`;
+
+export const Left = styled.div`
+  float: left;
+  width: 518px;
+`;
+
+export const Middle = styled.div`
+  float: left;
+  width: 150px;
+  margin-left: 17px;
+`;
+
+export const Right = styled.div`
+  float: right;
+  width: 140px;
+  margin-right: 60px;
+`;
+
+export const LeftCity = styled.div`
+  float: left;
+  width: 269px;
+`;
+
+export const MiddleState = styled.div`
+  float: left;
+  width: 269px;
+  margin-left: 15px;
+`;
+
+export const RightZipCode = styled.div`
+  float: right;
+  width: 269px;
+  margin-right: 60px;
+  margin-left: 5px;
 `;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, Input } from '@rocketseat/unform';
-// import * as Yup from 'yup';
+import { Form } from '@rocketseat/unform';
+import * as Yup from 'yup';
 import api from '../../../services/api';
 import history from '../../../services/history';
 
@@ -11,24 +11,39 @@ import {
   ButtonVoltar,
   ButtonSalvar,
   List,
+  InputName,
+  InputStreet,
+  InputNumber,
+  InputComplement,
+  InputCity,
+  InputState,
+  InputZipCode,
+  Wrapper,
+  Left,
+  LeftCity,
+  Middle,
+  MiddleState,
+  Right,
+  RightZipCode,
 } from './styles';
 
-/* const schema = Yup.object().shape({
-  nome: Yup.string().required('Nome é obrigatório'),
-  email: Yup.string()
-    .email('Informe um e-mail válido')
-    .required('e-mail é obrigatório'),
-  idade: Yup.number()
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome é obrigatório'),
+  street: Yup.string().required('Rua é obrigatório'),
+  number: Yup.number()
     .integer()
-    .required('Idade é obrigatória')
-    .positive('Idade inválida'),
-}); */
+    .required('Número é obrigatório'),
+  // .positive('Número inválida'),
+  city: Yup.string().required('Cidade é obrigatório'),
+  state: Yup.string().required('Estado é obrigatório'),
+  zipcode: Yup.string().required('CEP é obrigatório'),
+});
 
 export default class RecipientStore extends Component {
   constructor() {
     super();
     this.state = {
-      recipient: [],
+      recipient: {},
       recipients: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,8 +60,6 @@ export default class RecipientStore extends Component {
       });
     } else {
       const response = await api.get('/recipient');
-
-      console.log(response.data);
 
       this.setState({
         recipients: response.data,
@@ -88,9 +101,9 @@ export default class RecipientStore extends Component {
     return (
       <Container>
         <Form
-          /* schema={schema} */
+          schema={schema}
           onSubmit={this.handleSubmit}
-          /* initialData={this.state.recipient} */
+          initialData={this.state.recipient}
         >
           <Content>
             <h1>Edição de destinatário</h1>
@@ -106,62 +119,38 @@ export default class RecipientStore extends Component {
             </aside>
           </Content>
           <List>
-            <table>
-              <tr>
-                <td>
-                  <h1>Nome</h1>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Input name="name" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h1>Rua</h1>
-                </td>
-                <td>
-                  <h1>Número</h1>
-                </td>
-                <td>
-                  <h1>Complemento</h1>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Input name="street" />
-                </td>
-                <td>
-                  <Input name="number" />
-                </td>
-                <td>
-                  <Input name="complement" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h1>Cidade</h1>
-                </td>
-                <td>
-                  <h1>Estado</h1>
-                </td>
-                <td>
-                  <h1>CEP</h1>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Input name="city" />
-                </td>
-                <td>
-                  <Input name="state" />
-                </td>
-                <td>
-                  <Input name="zipcode" />
-                </td>
-              </tr>
-            </table>
+            <h1>Nome</h1>
+            <div>
+              <InputName name="name" />
+            </div>
+            <Wrapper>
+              <Left>
+                <h1>Rua</h1>
+                <InputStreet name="street" />
+              </Left>
+              <Middle>
+                <h1>Número</h1>
+                <InputNumber name="number" />
+              </Middle>
+              <Right>
+                <h1>Complemento</h1>
+                <InputComplement name="complement" />
+              </Right>
+            </Wrapper>
+            <Wrapper>
+              <LeftCity>
+                <h1>Cidade</h1>
+                <InputCity name="city" />
+              </LeftCity>
+              <MiddleState>
+                <h1>Estado</h1>
+                <InputState name="state" />
+              </MiddleState>
+              <RightZipCode>
+                <h1>CEP</h1>
+                <InputZipCode name="zipcode" />
+              </RightZipCode>
+            </Wrapper>
           </List>
         </Form>
       </Container>

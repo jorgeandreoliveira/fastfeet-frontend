@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import api from '../../../services/api';
 import DetailDeliveryProblem from './components/DetailDeliveryProblem';
 
-import {
-  Container,
-  Titulo,
-  Content,
-  List,
-  LinkEditar,
-  LinkApagar,
-} from './styles';
+import { Container, Titulo, Content, List } from './styles';
+
+import Menu from './components/Menu';
 
 export default class DeliveryProblemList extends Component {
   constructor() {
@@ -58,8 +53,7 @@ export default class DeliveryProblemList extends Component {
       <tr>
         <th>Encomenda</th>
         <th>Problema</th>
-        <th>Visualizar</th>
-        <th>Cancelar encomenda</th>
+        <th>Ações</th>
       </tr>
     );
   }
@@ -70,22 +64,10 @@ export default class DeliveryProblemList extends Component {
       const { delivery_id } = deliveryProblem;
       return (
         <tr key={id}>
-          <td>{delivery_id < 10 ? `#0${delivery_id}` : {delivery_id}}</td>
+          <td>{delivery_id < 10 ? `#0${delivery_id}` : { delivery_id }}</td>
           <td>{deliveryProblem.description}</td>
           <td>
-            <LinkEditar onClick={() => this.handleModalOpen({ id })}>
-              Visualizar
-            </LinkEditar>
-          </td>
-          <td>
-            <LinkApagar
-              to=""
-              onClick={() =>
-                this.handleDelete(`${deliveryProblem.delivery_id}`)
-              }
-            >
-              Cancelar encomenda
-            </LinkApagar>
+            <Menu id={id} />
           </td>
         </tr>
       );
