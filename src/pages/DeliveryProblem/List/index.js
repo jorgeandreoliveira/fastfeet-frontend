@@ -64,10 +64,10 @@ export default class DeliveryProblemList extends Component {
       const { delivery_id } = deliveryProblem;
       return (
         <tr key={id}>
-          <td>{delivery_id < 10 ? `#0${delivery_id}` : { delivery_id }}</td>
+          <td>{delivery_id < 10 ? `#0${delivery_id}` : `#${delivery_id}`}</td>
           <td>{deliveryProblem.description}</td>
           <td>
-            <Menu id={id} />
+            <Menu deliveryProblemDescription={deliveryProblem.description} />
           </td>
         </tr>
       );

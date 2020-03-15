@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
-import ModalSetup from '../../../components/Modal';
 import DetailDelivery from './components/DetailDelivery';
 import Icon from '../../assets/search.png';
 
@@ -74,7 +73,6 @@ export default class DeliveryList extends Component {
         <th>Estado</th>
         <th>Status</th>
         <th>Ações</th>
-        <th>Visualizar</th>
       </tr>
     );
   }
@@ -84,27 +82,14 @@ export default class DeliveryList extends Component {
       const { id } = delivery;
       return (
         <tr key={id}>
-          <td>{id < 10 ? `#0${id}` : { id }}</td>
+          <td>{id < 10 ? `#0${id}` : `#${id}`}</td>
           <td>{delivery.Recipient.name}</td>
           <td>{delivery.DeliveryMan.name}</td>
           <td>{delivery.Recipient.city}</td>
           <td>{delivery.Recipient.state}</td>
           <td>{delivery.status}</td>
           <td>
-            <Menu id={id} />
-          </td>
-          <td>
-            <button
-              type="button"
-              onClick={() => this.handleModalOpen({ delivery })}
-            >
-              Visualizar
-            </button>
-            <ModalSetup
-              visible={isModalOpen}
-              dismiss={this.dissmissable}
-              children={children}
-            />
+            <Menu delivery={delivery} />
           </td>
         </tr>
       );
@@ -139,8 +124,10 @@ export default class DeliveryList extends Component {
             </button>
           </Busca>
           <List>
-            {this.renderTableHeader()}
-            {this.renderTableData(this.state.isModalOpen, children)}
+            <tbody>
+              {this.renderTableHeader()}
+              {this.renderTableData(this.state.isModalOpen, children)}
+            </tbody>
           </List>
         </Content>
       </Container>

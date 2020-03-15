@@ -10,7 +10,6 @@ import RecipientStore from '../pages/Recipient/Store';
 import DeliveryManList from '../pages/DeliveryMan/List';
 import DeliveryManStore from '../pages/DeliveryMan/Store';
 import DeliveryProblemList from '../pages/DeliveryProblem/List';
-import Menu from '../pages/Menu';
 
 export default function Routes() {
   return (
@@ -18,18 +17,23 @@ export default function Routes() {
       <Route path="/" exact component={Login} />
       <Route path="/Login" component={Login} />
       <Route path="/DeliveryList" component={DeliveryList} isPrivate />
-      <Route path="/DeliveryStore" component={DeliveryStore} isPrivate />
+      {/* <Route path="/DeliveryStore" component={DeliveryStore} isPrivate /> */}
       <Route path="/RecipientList" component={RecipientList} isPrivate />
-      <Route path="/RecipientStore" component={RecipientStore} isPrivate />
+      {/* <Route path="/RecipientStore" component={RecipientStore} isPrivate /> */}
       <Route path="/DeliveryManList" component={DeliveryManList} isPrivate />
-      <Route path="/DeliveryManStore" component={DeliveryManStore} isPrivate />
-      <Route path="/Menu" component={Menu} isPrivate />
+      {/* <Route path="/DeliveryManStore" component={DeliveryManStore} isPrivate /> */}
       <Route
         path="/DeliveryProblemList"
         component={DeliveryProblemList}
         isPrivate
       />
       <Route path="/DeliveryStore/:id" component={DeliveryStore} isPrivate />
+      <Route
+        path="/DeliveryManStore/:id"
+        component={DeliveryManStore}
+        isPrivate
+      />
+      <Route path="/RecipientStore/:id" component={RecipientStore} isPrivate />
     </Switch>
   );
 }

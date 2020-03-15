@@ -24,14 +24,19 @@ const schema = Yup.object().shape({
 });
 
 export default class DeliveryStore extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      delivery: [],
+      delivery: {},
+      recipient_id: {},
+      deliveryman_id: {},
       recipients: [],
       deliveryMen: [],
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.setValueRecipient = this.setValueRecipient.bind(this);
+    this.setValueDeliveryMan = this.setValueDeliveryMan.bind(this);
   }
 
   async componentDidMount() {
@@ -42,30 +47,40 @@ export default class DeliveryStore extends Component {
 
       this.setState({
         delivery: response.data,
-      });
-    } else {
-      const recipients = await api.get('/recipient');
-
-      const listRecipients = recipients.data.map(v => ({
-        id: v.id,
-        title: v.name,
-      }));
-
-      this.setState({
-        recipients: listRecipients,
-      });
-
-      const deliverymen = await api.get('/deliveryman');
-
-      const listDeliveryMan = deliverymen.data.map(v => ({
-        id: v.id,
-        title: v.name,
-      }));
-
-      this.setState({
-        deliveryMen: listDeliveryMan,
+        deliveryman_id: response.data.deliveryman_id,
+        recipient_id: response.data.recipient_id,
       });
     }
+
+    const recipients = await api.get('/recipient');
+
+    const listRecipients = recipients.data.map(v => ({
+      id: v.id,
+      title: v.name,
+    }));
+
+    this.setState({
+      recipients: listRecipients,
+    });
+
+    const deliverymen = await api.get('/deliveryman');
+
+    const listDeliveryMan = deliverymen.data.map(v => ({
+      id: v.id,
+      title: v.name,
+    }));
+
+    this.setState({
+      deliveryMen: listDeliveryMan,
+    });
+  }
+
+  setValueRecipient(event) {
+    this.setState({ recipient_id: event.target.value });
+  }
+
+  setValueDeliveryMan(event) {
+    this.setState({ deliveryman_id: event.target.value });
   }
 
   async handleSubmit(data) {
@@ -113,11 +128,18 @@ export default class DeliveryStore extends Component {
             <Wrapper>
               <Left>
                 <h1>Destinatário</h1>
-                <Select name="recipient_id" options={this.state.recipients} />
+                <Select
+                  value={this.state.recipient_id}
+                  onChange={this.setValueRecipient}
+                  name="recipient_id"
+                  options={this.state.recipients}
+                />
               </Left>
               <Right>
                 <h1>Entregador</h1>
                 <Select
+                  value={this.state.deliveryman_id}
+                  onChange={this.setValueDeliveryMan}
                   name="deliveryman_id"
                   options={this.state.deliveryMen}
                 />
@@ -127,7 +149,7 @@ export default class DeliveryStore extends Component {
               <h1>Nome do produto</h1>
             </Product>
             <div>
-              <Input name="product" />
+              <Input name="product" initialData={this.state.delivery.product} />
             </div>
           </List>
         </Form>

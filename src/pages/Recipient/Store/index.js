@@ -40,8 +40,8 @@ const schema = Yup.object().shape({
 });
 
 export default class RecipientStore extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       recipient: {},
       recipients: [],
@@ -121,34 +121,52 @@ export default class RecipientStore extends Component {
           <List>
             <h1>Nome</h1>
             <div>
-              <InputName name="name" />
+              <InputName name="name" initialData={this.state.recipient.name} />
             </div>
             <Wrapper>
               <Left>
                 <h1>Rua</h1>
-                <InputStreet name="street" />
+                <InputStreet
+                  name="street"
+                  initialData={this.state.recipient.street}
+                />
               </Left>
               <Middle>
                 <h1>Número</h1>
-                <InputNumber name="number" />
+                <InputNumber
+                  name="number"
+                  initialData={this.state.recipient.number}
+                />
               </Middle>
               <Right>
                 <h1>Complemento</h1>
-                <InputComplement name="complement" />
+                <InputComplement
+                  name="complement"
+                  initialData={this.state.recipient.complement}
+                />
               </Right>
             </Wrapper>
             <Wrapper>
               <LeftCity>
                 <h1>Cidade</h1>
-                <InputCity name="city" />
+                <InputCity
+                  name="city"
+                  initialData={this.state.recipient.city}
+                />
               </LeftCity>
               <MiddleState>
                 <h1>Estado</h1>
-                <InputState name="state" />
+                <InputState
+                  name="state"
+                  initialData={this.state.recipient.state}
+                />
               </MiddleState>
               <RightZipCode>
                 <h1>CEP</h1>
-                <InputZipCode name="zipcode" />
+                <InputZipCode
+                  name="zipcode"
+                  initialData={this.state.recipient.zipcode}
+                />
               </RightZipCode>
             </Wrapper>
           </List>

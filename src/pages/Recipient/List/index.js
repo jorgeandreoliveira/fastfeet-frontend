@@ -77,7 +77,7 @@ export default class RecipientList extends Component {
       const { id } = recipient;
       return (
         <tr key={id}>
-          <td>{id < 10 ? `#0${id}` : { id }}</td>
+          <td>{id < 10 ? `#0${id}` : `#${id}`}</td>
           <td>{recipient.name}</td>
           <td>
             {recipient.street}, {recipient.number}, {recipient.city} -{' '}

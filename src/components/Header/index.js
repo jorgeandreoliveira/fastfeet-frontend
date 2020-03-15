@@ -14,13 +14,12 @@ export default function Header() {
           <Link to="/DeliveryManList">ENTREGADORES</Link>
           <Link to="/RecipientList">DESTINATÁRIOS</Link>
           <Link to="/DeliveryProblemList">PROBLEMAS</Link>
-          <Link to="/Menu">MENU</Link>
         </nav>
         <aside>
           <Profile>
             <div>
               <strong>Admin FastFeet</strong>
-              <Link to="/Logout">sair do sistema</Link>
+              <Link to="/Login">sair do sistema</Link>
             </div>
           </Profile>
         </aside>

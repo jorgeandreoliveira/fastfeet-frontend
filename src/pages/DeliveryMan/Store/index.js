@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-// import * as Yup from 'yup';
-import api from '../../../services/api';
+import * as Yup from 'yup';
 import history from '../../../services/history';
+import api from '../../../services/api';
 
 import {
   Container,
@@ -13,22 +13,18 @@ import {
   List,
 } from './styles';
 
-/* const schema = Yup.object().shape({
-  nome: Yup.string().required('Nome é obrigatório'),
+const schema = Yup.object().shape({
+  name: Yup.string().required('Nome é obrigatório'),
   email: Yup.string()
     .email('Informe um e-mail válido')
     .required('e-mail é obrigatório'),
-  idade: Yup.number()
-    .integer()
-    .required('Idade é obrigatória')
-    .positive('Idade inválida'),
-}); */
+});
 
 export default class DeliveryManStore extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      deliveryMan: [],
+      deliveryMan: {},
       deliveryMen: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -78,9 +74,9 @@ export default class DeliveryManStore extends Component {
     return (
       <Container>
         <Form
-          /* schema={schema} */
+          schema={schema}
           onSubmit={this.handleSubmit}
-          /* initialData={this.state.recipient} */
+          initialData={this.state.deliveryMan}
         >
           <Content>
             <h1>Edição de entregadores</h1>
@@ -99,26 +95,40 @@ export default class DeliveryManStore extends Component {
           </Content>
           <List>
             <table>
-              <tr>
-                <td>
-                  <h1>Nome</h1>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Input name="name" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <h1>Email</h1>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <Input name="email" />
-                </td>
-              </tr>
+              <thead>
+                <tr>
+                  <td>
+                    <h1>Nome</h1>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Input
+                      name="name"
+                      initialData={this.state.deliveryMan.name}
+                    />
+                  </td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                  <td>
+                    <h1>Email</h1>
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <Input
+                      name="email"
+                      initialData={this.state.deliveryMan.email}
+                    />
+                  </td>
+                </tr>
+              </tbody>
             </table>
           </List>
         </Form>

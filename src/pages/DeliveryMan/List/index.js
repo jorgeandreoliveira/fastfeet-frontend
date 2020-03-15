@@ -77,7 +77,7 @@ export default class DeliveryManList extends Component {
       const { id } = deliveryMan;
       return (
         <tr key={id}>
-          <td>{id < 10 ? `#0${id}` : { id }}</td>
+          <td>{id < 10 ? `#0${id}` : `#${id}`}</td>
           <td>{deliveryMan.avatar_id}</td>
           <td>{deliveryMan.name}</td>
           <td>{deliveryMan.email}</td>
