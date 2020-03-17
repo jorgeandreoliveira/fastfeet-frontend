@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
-import DetailDeliveryProblem from './components/DetailDeliveryProblem';
-
 import { Container, Titulo, Content, List } from './styles';
-
 import Menu from './components/Menu';
 
 export default class DeliveryProblemList extends Component {
@@ -11,12 +8,7 @@ export default class DeliveryProblemList extends Component {
     super();
     this.state = {
       deliveryProblems: [],
-      deliveryProblem: {},
-      isModalOpen: false,
     };
-
-    this.handleModalOpen = this.handleModalOpen.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   async componentDidMount() {
@@ -24,28 +16,6 @@ export default class DeliveryProblemList extends Component {
     this.setState({
       deliveryProblems: response.data,
     });
-  }
-
-  dismissable = () => {
-    this.setState({
-      isModalOpen: false,
-    });
-  };
-
-  async handleModalOpen(deliveryProblem) {
-    this.setState({
-      isModalOpen: !this.state.isModalOpen,
-    });
-
-    const response = await api.get(`/deliveryproblem/${deliveryProblem.id}`);
-
-    this.setState({
-      deliveryProblem: response.data,
-    });
-  }
-
-  handleDelete(id) {
-    api.delete(`/deliveryproblem/${id}`);
   }
 
   renderTableHeader() {
@@ -75,14 +45,6 @@ export default class DeliveryProblemList extends Component {
   }
 
   render() {
-    const { isModalOpen } = this.state;
-
-    let children;
-    if (isModalOpen) {
-      children = (
-        <DetailDeliveryProblem delivery={this.state.deliveryProblem} />
-      );
-    }
     return (
       <Container>
         <Content>

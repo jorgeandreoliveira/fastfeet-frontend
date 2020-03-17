@@ -52,17 +52,11 @@ export default class RecipientStore extends Component {
   async componentDidMount() {
     const { match } = this.props;
 
-    if (match.params.id) {
+    if (match.params.id && match.params.id > 0) {
       const response = await api.get(`/recipient/${match.params.id}`);
 
       this.setState({
         recipient: response.data,
-      });
-    } else {
-      const response = await api.get('/recipient');
-
-      this.setState({
-        recipients: response.data,
       });
     }
   }
@@ -163,10 +157,13 @@ export default class RecipientStore extends Component {
               </MiddleState>
               <RightZipCode>
                 <h1>CEP</h1>
-                <InputZipCode
-                  name="zipcode"
-                  initialData={this.state.recipient.zipcode}
-                />
+                <div>
+                  <InputZipCode
+                    mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
+                    name="zipcode"
+                    initialData={this.state.recipient.zipcode}
+                  />
+                </div>
               </RightZipCode>
             </Wrapper>
           </List>

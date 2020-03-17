@@ -42,7 +42,7 @@ export default class DeliveryStore extends Component {
   async componentDidMount() {
     const { match } = this.props;
 
-    if (match.params.id) {
+    if (match.params.id && match.params.id > 0) {
       const response = await api.get(`/delivery/${match.params.id}`);
 
       this.setState({

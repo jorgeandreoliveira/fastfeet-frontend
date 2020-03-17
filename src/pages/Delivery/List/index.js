@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../../services/api';
 import history from '../../../services/history';
-import DetailDelivery from './components/DetailDelivery';
 import Icon from '../../assets/search.png';
-
+import Menu from './components/Menu';
 import { Container, Titulo, Content, Busca, List } from './styles';
-
-import Menu from '../../Menu';
 
 let DELIVERIES_INITAL_STATE = [];
 
@@ -15,11 +12,9 @@ export default class DeliveryList extends Component {
     super();
     this.state = {
       deliveries: [],
-      isModalOpen: false,
       delivery: {},
     };
 
-    this.handleModalOpen = this.handleModalOpen.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -38,13 +33,6 @@ export default class DeliveryList extends Component {
       isModalOpen: false,
     });
   };
-
-  handleModalOpen(selectedDelivery) {
-    this.setState({
-      isModalOpen: !this.state.isModalOpen,
-      delivery: selectedDelivery.delivery,
-    });
-  }
 
   handleChange(e) {
     const filter = e.target.value;
@@ -77,7 +65,7 @@ export default class DeliveryList extends Component {
     );
   }
 
-  renderTableData(isModalOpen, children) {
+  renderTableData() {
     return this.state.deliveries.map(delivery => {
       const { id } = delivery;
       return (
@@ -97,11 +85,6 @@ export default class DeliveryList extends Component {
   }
 
   render() {
-    const { isModalOpen } = this.state;
-    let children;
-    if (isModalOpen) {
-      children = <DetailDelivery delivery={this.state.delivery} />;
-    }
     return (
       <Container>
         <Content>
@@ -118,7 +101,7 @@ export default class DeliveryList extends Component {
             </div>
             <button
               type="button"
-              onClick={() => history.push('/DeliveryStore')}
+              onClick={() => history.push('/DeliveryStore/0')}
             >
               + CADASTRAR
             </button>
@@ -126,7 +109,7 @@ export default class DeliveryList extends Component {
           <List>
             <tbody>
               {this.renderTableHeader()}
-              {this.renderTableData(this.state.isModalOpen, children)}
+              {this.renderTableData()}
             </tbody>
           </List>
         </Content>

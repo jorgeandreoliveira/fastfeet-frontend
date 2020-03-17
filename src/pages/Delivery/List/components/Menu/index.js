@@ -6,8 +6,9 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import api from '../../services/api';
+import api from '../../../../../services/api';
 import {
+  Container,
   MoreButton,
   CustomVisibilityIcon,
   CustomEditIcon,
@@ -52,7 +53,7 @@ export default function SimpleMenu(props) {
   };
 
   return (
-    <div>
+    <Container>
       <MoreButton
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -115,11 +116,8 @@ export default function SimpleMenu(props) {
           <SubTitle>Entrega:</SubTitle>
           <Data>{props.delivery.end_date}</Data>
           <Title>Assinatura do destinatário</Title>
-          {/* <a href="javascript:void(0);" onClick={() => closeModal()}>
-            Close
-          </a> */}
         </DivModal>
       </Modal>
-    </div>
+    </Container>
   );
 }

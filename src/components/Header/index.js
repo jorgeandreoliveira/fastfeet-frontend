@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { logout } from '../../services/auth';
 import { Container, Content, Profile, Separator } from './styles';
 import Logo from '../../pages/assets/headerlogo.png';
 
@@ -19,7 +20,7 @@ export default function Header() {
           <Profile>
             <div>
               <strong>Admin FastFeet</strong>
-              <Link to="/Login">sair do sistema</Link>
+              <Link to="/Login" onClick={() => logout()}>sair do sistema</Link>
             </div>
           </Profile>
         </aside>

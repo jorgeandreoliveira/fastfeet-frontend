@@ -25,7 +25,6 @@ export default class DeliveryManStore extends Component {
     super(props);
     this.state = {
       deliveryMan: {},
-      deliveryMen: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,17 +32,11 @@ export default class DeliveryManStore extends Component {
   async componentDidMount() {
     const { match } = this.props;
 
-    if (match.params.id) {
+    if (match.params.id && match.params.id > 0) {
       const response = await api.get(`/deliveryman/${match.params.id}`);
 
       this.setState({
         deliveryMan: response.data,
-      });
-    } else {
-      const response = await api.get('/deliveryman');
-
-      this.setState({
-        deliveryMen: response.data,
       });
     }
   }

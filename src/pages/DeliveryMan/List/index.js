@@ -106,7 +106,7 @@ export default class DeliveryManList extends Component {
             </div>
             <button
               type="button"
-              onClick={() => history.push('/DeliveryManStore')}
+              onClick={() => history.push('/DeliveryManStore/0')}
             >
               + CADASTRAR
             </button>

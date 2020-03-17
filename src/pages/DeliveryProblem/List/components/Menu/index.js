@@ -1,5 +1,4 @@
 import React from 'react';
-// import { parseISO, format, zonedTimeToUtc } from 'date-fns';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -86,7 +85,7 @@ export default function SimpleMenu(props) {
         onClickAway={() => closeModal()}
       >
         <DivModal>
-          <Title>Informações da encomenda</Title>
+          <Title>VISUALIZAR PROBLEMA</Title>
           <Data>{props.deliveryProblemDescription}</Data>
         </DivModal>
       </Modal>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Input } from '@rocketseat/unform';
+import MaskedInput from 'react-text-mask';
 
 export const Container = styled.div`
   height: 100px;
@@ -148,7 +149,7 @@ export const InputState = styled(Input)`
   margin-left: 30px;
 `;
 
-export const InputZipCode = styled(Input)`
+export const InputZipCode = styled(MaskedInput)`
   width: 269px;
   height: 45px;
   background: #ffffff;

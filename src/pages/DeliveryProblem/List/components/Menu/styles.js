@@ -24,14 +24,14 @@ export const DivModal = styledComponents.div`
 `;
 
 export const Title = styledComponents.div`
-  fontSize: 16px;
-  fontWeight: bold;
+  font-size: 14px;
+  font-weight: bold;
   color: #444;
   padding-top: 25px;
 `;
 
 export const Data = styledComponents.div`
-  fontSize: 16px;
+  font-size: 16px;
   color: #666;
-  padding-top: 5px;
+  padding-top: 4px;
 `;

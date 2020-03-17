@@ -108,7 +108,7 @@ export default class RecipientList extends Component {
             </div>
             <button
               type="button"
-              onClick={() => history.push('/RecipientStore')}
+              onClick={() => history.push('/RecipientStore/0')}
             >
               + CADASTRAR
             </button>
