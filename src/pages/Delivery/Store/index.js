@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input, Select } from '@rocketseat/unform';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import DoneIcon from '@material-ui/icons/Done';
 import * as Yup from 'yup';
 import history from '../../../services/history';
 import api from '../../../services/api';
@@ -15,6 +18,7 @@ import {
   Left,
   Right,
   Product,
+  TextButton,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -86,8 +90,10 @@ export default class DeliveryStore extends Component {
   async handleSubmit(data) {
     const { recipient_id, deliveryman_id, product } = data;
 
-    if (this.state.delivery.id) {
-      await api.put(`/delivery/${this.state.delivery.id}`, {
+    const { delivery } = this.state;
+
+    if (delivery.id) {
+      await api.put(`/delivery/${delivery.id}`, {
         recipient_id,
         deliveryman_id,
         product,
@@ -104,23 +110,36 @@ export default class DeliveryStore extends Component {
   }
 
   render() {
+    const {
+      delivery,
+      recipient_id,
+      recipients,
+      deliveryman_id,
+      deliveryMen,
+    } = this.state;
+
     return (
       <Container>
         <Form
           schema={schema}
           onSubmit={this.handleSubmit}
-          initialData={this.state.delivery}
+          initialData={delivery}
         >
           <Content>
             <h1>Edição de encomendas</h1>
             <aside>
               <Profile>
-                <div>
-                  <ButtonVoltar onClick={() => history.push('/DeliveryList')}>
-                    {'< Voltar'}
-                  </ButtonVoltar>
-                  <ButtonSalvar type="submit">Salvar</ButtonSalvar>
-                </div>
+                <ButtonVoltar
+                  type="button"
+                  onClick={() => history.push('/DeliveryList')}
+                >
+                  <KeyboardArrowLeftIcon />
+                  <TextButton>VOLTAR</TextButton>
+                </ButtonVoltar>
+                <ButtonSalvar type="submit">
+                  <DoneIcon />
+                  <TextButton>SALVAR</TextButton>
+                </ButtonSalvar>
               </Profile>
             </aside>
           </Content>
@@ -129,19 +148,19 @@ export default class DeliveryStore extends Component {
               <Left>
                 <h1>Destinatário</h1>
                 <Select
-                  value={this.state.recipient_id}
+                  value={recipient_id}
                   onChange={this.setValueRecipient}
                   name="recipient_id"
-                  options={this.state.recipients}
+                  options={recipients}
                 />
               </Left>
               <Right>
                 <h1>Entregador</h1>
                 <Select
-                  value={this.state.deliveryman_id}
+                  value={deliveryman_id}
                   onChange={this.setValueDeliveryMan}
                   name="deliveryman_id"
-                  options={this.state.deliveryMen}
+                  options={deliveryMen}
                 />
               </Right>
             </Wrapper>
@@ -149,7 +168,7 @@ export default class DeliveryStore extends Component {
               <h1>Nome do produto</h1>
             </Product>
             <div>
-              <Input name="product" initialData={this.state.delivery.product} />
+              <Input name="product" initialData={delivery.product} />
             </div>
           </List>
         </Form>
@@ -157,3 +176,11 @@ export default class DeliveryStore extends Component {
     );
   }
 }
+
+DeliveryStore.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  }),
+};

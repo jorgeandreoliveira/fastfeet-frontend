@@ -15,7 +15,6 @@ export default class RecipientList extends Component {
     this.state = {
       recipients: [],
       isModalOpen: false,
-      recipient: {},
     };
 
     this.handleModalOpen = this.handleModalOpen.bind(this);
@@ -29,7 +28,9 @@ export default class RecipientList extends Component {
       recipients: response.data,
     });
 
-    RECIPIENT_INITAL_STATE = this.state.recipients;
+    const { recipients } = this.state;
+
+    RECIPIENT_INITAL_STATE = recipients;
   }
 
   dismissable = () => {
@@ -38,10 +39,11 @@ export default class RecipientList extends Component {
     });
   };
 
-  handleModalOpen(selectedRecipient) {
+  handleModalOpen() {
+    const { isModalOpen } = this.state;
+
     this.setState({
-      isModalOpen: !this.state.isModalOpen,
-      recipient: selectedRecipient.recipient,
+      isModalOpen: !isModalOpen,
     });
   }
 
@@ -53,7 +55,9 @@ export default class RecipientList extends Component {
       return;
     }
 
-    const listrecipients = this.state.recipients.filter(
+    const { recipients } = this.state;
+
+    const listrecipients = recipients.filter(
       el => el.name.indexOf(filter) > -1
     );
 
@@ -73,7 +77,9 @@ export default class RecipientList extends Component {
   }
 
   renderTableData() {
-    return this.state.recipients.map(recipient => {
+    const { recipients } = this.state;
+
+    return recipients.map(recipient => {
       const { id } = recipient;
       return (
         <tr key={id}>
@@ -108,7 +114,7 @@ export default class RecipientList extends Component {
             </div>
             <button
               type="button"
-              onClick={() => history.push('/RecipientStore/0')}
+              onClick={() => history.push(`/RecipientStore/${0}`)}
             >
               + CADASTRAR
             </button>

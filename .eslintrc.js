@@ -30,6 +30,11 @@ module.exports = {
       'warn',
       { extensions: ['.jsx', '.js'] }
     ],
-    'import/prefer-default-export': 'off'
+    'import/prefer-default-export': 'off',
+    'import/no-unresolved': 'off',
+    'no-param-reassign': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'camelcase': 'off',
+    'react/require-default-props': [0, { forbidDefaultForRequired: true, ignoreFunctionalComponents: true }],
   },
 };

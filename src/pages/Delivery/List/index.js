@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import AddIcon from '@material-ui/icons/Add';
 import api from '../../../services/api';
 import history from '../../../services/history';
 import Icon from '../../assets/search.png';
 import Menu from './components/Menu';
-import { Container, Titulo, Content, Busca, List } from './styles';
+import {
+  Container,
+  Titulo,
+  Content,
+  Busca,
+  List,
+  ImageButton,
+  TextButton,
+} from './styles';
 
 let DELIVERIES_INITAL_STATE = [];
 
@@ -12,7 +21,6 @@ export default class DeliveryList extends Component {
     super();
     this.state = {
       deliveries: [],
-      delivery: {},
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,24 +33,22 @@ export default class DeliveryList extends Component {
       deliveries: response.data,
     });
 
-    DELIVERIES_INITAL_STATE = this.state.deliveries;
-  }
+    const { deliveries } = this.state;
 
-  dismissable = () => {
-    this.setState({
-      isModalOpen: false,
-    });
-  };
+    DELIVERIES_INITAL_STATE = deliveries;
+  }
 
   handleChange(e) {
     const filter = e.target.value;
+
+    const { deliveries } = this.state;
 
     if (filter === '') {
       this.setState({ deliveries: DELIVERIES_INITAL_STATE });
       return;
     }
 
-    const listDeliveries = this.state.deliveries.filter(
+    const listDeliveries = deliveries.filter(
       delivery => delivery.product.indexOf(filter) > -1
     );
 
@@ -66,7 +72,9 @@ export default class DeliveryList extends Component {
   }
 
   renderTableData() {
-    return this.state.deliveries.map(delivery => {
+    const { deliveries } = this.state;
+
+    return deliveries.map(delivery => {
       const { id } = delivery;
       return (
         <tr key={id}>
@@ -99,12 +107,13 @@ export default class DeliveryList extends Component {
                 placeholder="Buscar por encomendas"
               />
             </div>
-            <button
+            <ImageButton
               type="button"
               onClick={() => history.push('/DeliveryStore/0')}
             >
-              + CADASTRAR
-            </button>
+              <AddIcon />
+              <TextButton>CADASTRAR</TextButton>
+            </ImageButton>
           </Busca>
           <List>
             <tbody>

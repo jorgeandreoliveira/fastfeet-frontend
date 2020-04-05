@@ -20,7 +20,9 @@ export default function Header() {
           <Profile>
             <div>
               <strong>Admin FastFeet</strong>
-              <Link to="/Login" onClick={() => logout()}>sair do sistema</Link>
+              <Link to="/Login" onClick={() => logout()}>
+                sair do sistema
+              </Link>
             </div>
           </Profile>
         </aside>

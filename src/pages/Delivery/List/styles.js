@@ -45,11 +45,13 @@ export const Busca = styled.div`
   button {
     color: #ffffff;
     margin-right: 20px;
-    background: #7d40e7 0% 0% no-repeat padding-box;
+    background: #7d40e7;
     border-radius: 4px;
     opacity: 1;
     width: 142px;
     height: 36px;
+    font-size: 14px;
+    font-weight: bold;
   }
 `;
 
@@ -86,4 +88,19 @@ export const LinkEditar = styled(Link)`
 export const LinkApagar = styled(Link)`
   font-size: 15px;
   color: #de3b3b;
+`;
+
+export const ImageButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextButton = styled.text`
+  text-align: center;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 14px;
+  font-weight: bold;
 `;

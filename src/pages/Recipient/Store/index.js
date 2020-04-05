@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form } from '@rocketseat/unform';
 import * as Yup from 'yup';
-import api from '../../../services/api';
 import history from '../../../services/history';
+import api from '../../../services/api';
 
 import {
   Container,
@@ -33,7 +34,6 @@ const schema = Yup.object().shape({
   number: Yup.number()
     .integer()
     .required('Número é obrigatório'),
-  // .positive('Número inválida'),
   city: Yup.string().required('Cidade é obrigatório'),
   state: Yup.string().required('Estado é obrigatório'),
   zipcode: Yup.string().required('CEP é obrigatório'),
@@ -44,7 +44,6 @@ export default class RecipientStore extends Component {
     super(props);
     this.state = {
       recipient: {},
-      recipients: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -64,8 +63,9 @@ export default class RecipientStore extends Component {
   async handleSubmit(data) {
     const { id, name, street, number, complement, state, city, zipcode } = data;
 
-    if (this.state.recipient.id) {
-      await api.put(`/recipient/${this.state.recipient.id}`, {
+    const { recipient } = this.state;
+    if (recipient.id) {
+      await api.put(`/recipient/${recipient.id}`, {
         id,
         name,
         street,
@@ -92,12 +92,13 @@ export default class RecipientStore extends Component {
   }
 
   render() {
+    const { recipient } = this.state;
     return (
       <Container>
         <Form
           schema={schema}
           onSubmit={this.handleSubmit}
-          initialData={this.state.recipient}
+          initialData={recipient}
         >
           <Content>
             <h1>Edição de destinatário</h1>
@@ -115,53 +116,41 @@ export default class RecipientStore extends Component {
           <List>
             <h1>Nome</h1>
             <div>
-              <InputName name="name" initialData={this.state.recipient.name} />
+              <InputName name="name" initialdata={recipient.name} />
             </div>
             <Wrapper>
               <Left>
                 <h1>Rua</h1>
-                <InputStreet
-                  name="street"
-                  initialData={this.state.recipient.street}
-                />
+                <InputStreet name="street" initialdata={recipient.street} />
               </Left>
               <Middle>
                 <h1>Número</h1>
-                <InputNumber
-                  name="number"
-                  initialData={this.state.recipient.number}
-                />
+                <InputNumber name="number" initialdata={recipient.number} />
               </Middle>
               <Right>
                 <h1>Complemento</h1>
                 <InputComplement
                   name="complement"
-                  initialData={this.state.recipient.complement}
+                  initialdata={recipient.complement}
                 />
               </Right>
             </Wrapper>
             <Wrapper>
               <LeftCity>
                 <h1>Cidade</h1>
-                <InputCity
-                  name="city"
-                  initialData={this.state.recipient.city}
-                />
+                <InputCity name="city" initialdata={recipient.city} />
               </LeftCity>
               <MiddleState>
                 <h1>Estado</h1>
-                <InputState
-                  name="state"
-                  initialData={this.state.recipient.state}
-                />
+                <InputState name="state" initialdata={recipient.state} />
               </MiddleState>
               <RightZipCode>
                 <h1>CEP</h1>
                 <div>
                   <InputZipCode
-                    mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
+                    // mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                     name="zipcode"
-                    initialData={this.state.recipient.zipcode}
+                    initialdata={recipient.zipcode}
                   />
                 </div>
               </RightZipCode>
@@ -172,3 +161,11 @@ export default class RecipientStore extends Component {
     );
   }
 }
+
+RecipientStore.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  }),
+};

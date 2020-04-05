@@ -29,7 +29,8 @@ export default class DeliveryProblemList extends Component {
   }
 
   renderTableData() {
-    return this.state.deliveryProblems.map(deliveryProblem => {
+    const { deliveryProblems } = this.state;
+    return deliveryProblems.map(deliveryProblem => {
       const { id } = deliveryProblem;
       const { delivery_id } = deliveryProblem;
       return (

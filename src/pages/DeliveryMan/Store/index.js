@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import history from '../../../services/history';
@@ -44,8 +45,9 @@ export default class DeliveryManStore extends Component {
   async handleSubmit(data) {
     const { id, avatar_id, name, email } = data;
 
-    if (this.state.deliveryMan.id) {
-      await api.put(`/deliveryman/${this.state.deliveryMan.id}`, {
+    const { deliveryMan } = this.state;
+    if (deliveryMan.id) {
+      await api.put(`/deliveryman/${deliveryMan.id}`, {
         id,
         avatar_id,
         name,
@@ -64,12 +66,13 @@ export default class DeliveryManStore extends Component {
   }
 
   render() {
+    const { deliveryMan } = this.state;
     return (
       <Container>
         <Form
           schema={schema}
           onSubmit={this.handleSubmit}
-          initialData={this.state.deliveryMan}
+          initialData={deliveryMan}
         >
           <Content>
             <h1>Edição de entregadores</h1>
@@ -98,10 +101,7 @@ export default class DeliveryManStore extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <Input
-                      name="name"
-                      initialData={this.state.deliveryMan.name}
-                    />
+                    <Input name="name" initialdata={deliveryMan.name} />
                   </td>
                 </tr>
               </tbody>
@@ -115,10 +115,7 @@ export default class DeliveryManStore extends Component {
               <tbody>
                 <tr>
                   <td>
-                    <Input
-                      name="email"
-                      initialData={this.state.deliveryMan.email}
-                    />
+                    <Input name="email" initialdata={deliveryMan.email} />
                   </td>
                 </tr>
               </tbody>
@@ -129,3 +126,11 @@ export default class DeliveryManStore extends Component {
     );
   }
 }
+
+DeliveryManStore.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  }),
+};

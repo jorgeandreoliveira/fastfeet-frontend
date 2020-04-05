@@ -14,7 +14,6 @@ export default class DeliveryManList extends Component {
     this.state = {
       deliverymen: [],
       isModalOpen: false,
-      deliveryman: {},
     };
 
     this.handleModalOpen = this.handleModalOpen.bind(this);
@@ -28,7 +27,9 @@ export default class DeliveryManList extends Component {
       deliverymen: response.data,
     });
 
-    DELIVERYMEN_INITAL_STATE = this.state.deliverymen;
+    const { deliverymen } = this.state;
+
+    DELIVERYMEN_INITAL_STATE = deliverymen;
   }
 
   dismissable = () => {
@@ -37,10 +38,11 @@ export default class DeliveryManList extends Component {
     });
   };
 
-  handleModalOpen(selectedDeliveryMan) {
+  handleModalOpen() {
+    const { isModalOpen } = this.state;
+
     this.setState({
-      isModalOpen: !this.state.isModalOpen,
-      deliveryman: selectedDeliveryMan.deliveryMan,
+      isModalOpen: !isModalOpen,
     });
   }
 
@@ -52,7 +54,9 @@ export default class DeliveryManList extends Component {
       return;
     }
 
-    const listDeliveryMan = this.state.deliverymen.filter(
+    const { deliverymen } = this.state;
+
+    const listDeliveryMan = deliverymen.filter(
       el => el.name.indexOf(filter) > -1
     );
 
@@ -73,7 +77,9 @@ export default class DeliveryManList extends Component {
   }
 
   renderTableData() {
-    return this.state.deliverymen.map(deliveryMan => {
+    const { deliverymen } = this.state;
+
+    return deliverymen.map(deliveryMan => {
       const { id } = deliveryMan;
       return (
         <tr key={id}>

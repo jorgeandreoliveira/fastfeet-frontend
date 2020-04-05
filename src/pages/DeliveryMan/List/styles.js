@@ -47,11 +47,13 @@ export const Busca = styled.div`
   button {
     color: #ffffff;
     margin-right: 20px;
-    background: #7d40e7 0% 0% no-repeat padding-box;
+    background: #7d40e7;
     border-radius: 4px;
     opacity: 1;
     width: 142px;
     height: 36px;
+    font-size: 14px;
+    font-weight: bold;
   }
 `;
 

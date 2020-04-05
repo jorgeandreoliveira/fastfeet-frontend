@@ -1,5 +1,6 @@
 import { styled } from '@material-ui/core/styles';
 import styledComponents from 'styled-components';
+import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import EditIcon from '@material-ui/icons/Edit';
@@ -51,4 +52,20 @@ export const Data = styledComponents.div`
   font-size: 16px;
   color: #666;
   padding-top: 5px;
+`;
+
+export const ButtonDelete = styledComponents.button`
+  background: none !important;
+  border: none;
+  color: #999;
+  font-size: 16px;
+  padding-left: 2px;
+  cursor: pointer;
+`;
+
+export const MenuLink = styledComponents(Link)`
+  color: #999;
+  font-size: 16px;
+  padding-left: 2px;
+  padding-bottom: 5px;
 `;

@@ -35,3 +35,12 @@ export const Data = styledComponents.div`
   color: #666;
   padding-top: 4px;
 `;
+
+export const ButtonDelete = styledComponents.button`
+  background: none !important;
+  border: none;
+  color: #999;
+  font-size: 16px;
+  padding-left: 2px;
+  cursor: pointer;
+`;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Input } from '@rocketseat/unform';
-import MaskedInput from 'react-text-mask';
+// import MaskedInput from 'react-text-mask';
 
 export const Container = styled.div`
   height: 100px;
@@ -69,18 +69,17 @@ export const List = styled.div`
     color: #444;
     padding: 30px 0 5px 30px;
   }
-    input {
-      height: 45px;
-      background: #ffffff;
-      border: 1px solid #dddddd;
-      box-sizing: border-box;
-      border-radius: 4px;
-      justify-content: space-between;
-      margin-left: 30px;
-    }
-    .disabled {
-      background: #f5f5f5;
-    }
+  input {
+    height: 45px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    box-sizing: border-box;
+    border-radius: 4px;
+    justify-content: space-between;
+    margin-left: 30px;
+  }
+  .disabled {
+    background: #f5f5f5;
   }
 `;
 
@@ -149,7 +148,7 @@ export const InputState = styled(Input)`
   margin-left: 30px;
 `;
 
-export const InputZipCode = styled(MaskedInput)`
+export const InputZipCode = styled(Input)`
   width: 269px;
   height: 45px;
   background: #ffffff;

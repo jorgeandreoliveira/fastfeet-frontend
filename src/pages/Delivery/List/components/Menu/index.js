@@ -1,12 +1,12 @@
 import React from 'react';
-// import { parseISO, format, zonedTimeToUtc } from 'date-fns';
+import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import api from '../../../../../services/api';
+
 import {
   Container,
   MoreButton,
@@ -17,20 +17,22 @@ import {
   SubTitle,
   DivModal,
   Data,
+  ButtonDelete,
+  MenuLink,
 } from './styles';
 
 export default function SimpleMenu(props) {
-  // console.log(props.delivery.Recipient.start_date);
-  // console.log(parseISO(props.delivery.Recipient.start_date));
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [visible, setVisible] = React.useState(false);
 
-  // const [startDate, setStartDate] = React.useState(
-  //   props.delivery.Recipient.start_date
-  // );
+  const { delivery } = props;
+  const { id } = props;
 
+  const text = {
+    color: '#999',
+    fontSize: 16,
+  };
   function openModal() {
     setVisible(true);
   }
@@ -43,13 +45,30 @@ export default function SimpleMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDelete = id => {
-    api.delete(`/delivery/${id}`);
+  const handleDelete = deliveryId => {
+    api.delete(`/delivery/${deliveryId}`);
     window.location.reload(false);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const submit = () => {
+    confirmAlert({
+      title: '',
+      message: 'Deseja excluir esta encomenda?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(`${id}`),
+        },
+        {
+          label: 'Não',
+          onClick: () => handleClose(),
+        },
+      ],
+    });
   };
 
   return (
@@ -72,27 +91,25 @@ export default function SimpleMenu(props) {
           <ListItemIcon>
             <CustomVisibilityIcon fontSize="small" />
           </ListItemIcon>
-          <ListItemText primary="Visualizar" onClick={() => openModal()} />
+          <ListItemText
+            primaryTypographyProps={{ style: text }}
+            primary="Visualizar"
+            onClick={() => openModal()}
+          />
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <CustomEditIcon fontSize="small" />
           </ListItemIcon>
-          <Link to={`/DeliveryStore/${props.delivery.id}`}>Editar</Link>
+          <MenuLink to={`/DeliveryStore/${delivery.id}`}>Editar</MenuLink>
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <CustomDeleteIcon fontSize="small" />
           </ListItemIcon>
-          <Link
-            to=""
-            onClick={() => {
-              if (window.confirm('Deseja excluir esta encomenda?'))
-                handleDelete(`${props.delivery.id}`);
-            }}
-          >
+          <ButtonDelete type="button" onClick={submit}>
             Excluir
-          </Link>
+          </ButtonDelete>
         </MenuItem>
       </Menu>
       <Modal
@@ -104,20 +121,24 @@ export default function SimpleMenu(props) {
         <DivModal>
           <Title>Informações da encomenda</Title>
           <Data>
-            {props.delivery.Recipient.street},{props.delivery.Recipient.number}
+            {delivery.Recipient.street},{delivery.Recipient.number}
           </Data>
           <Data>
-            {props.delivery.Recipient.city} - {props.delivery.Recipient.state}
+            {delivery.Recipient.city} - {delivery.Recipient.state}
           </Data>
-          <Data>{props.delivery.Recipient.zipcode}</Data>
+          <Data>{delivery.Recipient.zipcode}</Data>
           <Title>Datas</Title>
           <SubTitle>Retirada:</SubTitle>
-          <Data>{props.delivery.start_date}</Data>
+          <Data>{delivery.start_date}</Data>
           <SubTitle>Entrega:</SubTitle>
-          <Data>{props.delivery.end_date}</Data>
+          <Data>{delivery.end_date}</Data>
           <Title>Assinatura do destinatário</Title>
         </DivModal>
       </Modal>
     </Container>
   );
 }
+
+// SimpleMenu.propTypes = {
+//   delivery: PropTypes.objectOf(PropTypes.object()),
+// };

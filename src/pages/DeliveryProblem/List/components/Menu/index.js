@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
 import MenuItem from '@material-ui/core/MenuItem';
-import { Link } from 'react-router-dom';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import api from '../../../../../services/api';
@@ -13,12 +14,16 @@ import {
   DivModal,
   Title,
   Data,
+  ButtonDelete,
 } from './styles';
 
 export default function SimpleMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const [visible, setVisible] = React.useState(false);
+
+  const { deliveryProblemDescription } = props;
+  const { id } = props;
 
   function openModal() {
     setVisible(true);
@@ -32,13 +37,30 @@ export default function SimpleMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDelete = id => {
-    api.delete(`/problem/:id/cancel-delivery/${id}`);
+  const handleDelete = deliveryProblemId => {
+    api.delete(`/problem/:id/cancel-delivery/${deliveryProblemId}`);
     window.location.reload(false);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const submit = () => {
+    confirmAlert({
+      title: '',
+      message: 'Deseja cancelar a encomenda?',
+      buttons: [
+        {
+          label: 'Sim',
+          onClick: () => handleDelete(`${id}`),
+        },
+        {
+          label: 'Não',
+          onClick: () => handleClose(),
+        },
+      ],
+    });
   };
 
   return (
@@ -67,15 +89,9 @@ export default function SimpleMenu(props) {
           <ListItemIcon>
             <CustomDeleteIcon fontSize="small" />
           </ListItemIcon>
-          <Link
-            to=""
-            onClick={() => {
-              if (window.confirm('Deseja cancelar a encomenda?'))
-                handleDelete(`${props.id}`);
-            }}
-          >
+          <ButtonDelete type="button" onClick={submit}>
             Cancelar encomenda
-          </Link>
+          </ButtonDelete>
         </MenuItem>
       </Menu>
       <Modal
@@ -86,9 +102,14 @@ export default function SimpleMenu(props) {
       >
         <DivModal>
           <Title>VISUALIZAR PROBLEMA</Title>
-          <Data>{props.deliveryProblemDescription}</Data>
+          <Data>{deliveryProblemDescription}</Data>
         </DivModal>
       </Modal>
     </div>
   );
 }
+
+SimpleMenu.propTypes = {
+  deliveryProblemDescription: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+};
