@@ -24,7 +24,6 @@ export const Profile = styled.div`
   padding-left: 10px;
   align-items: center;
   justify-content: center;
-
   text-align: right;
   margin-right: 200px;
 `;

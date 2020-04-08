@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import AddIcon from '@material-ui/icons/Add';
 import api from '../../../services/api';
 import history from '../../../services/history';
 import Icon from '../../assets/search.png';
 import Menu from './components/Menu';
 
-import { Container, Titulo, Content, Busca, List } from './styles';
+import {
+  Container,
+  Titulo,
+  Content,
+  Busca,
+  List,
+  ImageButton,
+  TextButton,
+} from './styles';
 
 let DELIVERYMEN_INITAL_STATE = [];
 
@@ -110,12 +119,13 @@ export default class DeliveryManList extends Component {
                 placeholder="Buscar por entregadores"
               />
             </div>
-            <button
+            <ImageButton
               type="button"
               onClick={() => history.push('/DeliveryManStore/0')}
             >
-              + CADASTRAR
-            </button>
+              <AddIcon />
+              <TextButton>CADASTRAR</TextButton>
+            </ImageButton>
           </Busca>
           <List>
             <tbody>

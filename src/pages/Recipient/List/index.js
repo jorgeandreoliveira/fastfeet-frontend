@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
+import AddIcon from '@material-ui/icons/Add';
 import api from '../../../services/api';
 import history from '../../../services/history';
 import Icon from '../../assets/search.png';
 
-import { Container, Titulo, Content, Busca, List } from './styles';
+import {
+  Container,
+  Titulo,
+  Content,
+  Busca,
+  List,
+  ImageButton,
+  TextButton,
+} from './styles';
 
 import Menu from '../components/Menu';
 
@@ -112,12 +121,13 @@ export default class RecipientList extends Component {
                 placeholder="Buscar por destinatários"
               />
             </div>
-            <button
+            <ImageButton
               type="button"
               onClick={() => history.push(`/RecipientStore/${0}`)}
             >
-              + CADASTRAR
-            </button>
+              <AddIcon />
+              <TextButton>CADASTRAR</TextButton>
+            </ImageButton>
           </Busca>
           <List>
             <tbody>

@@ -90,3 +90,18 @@ export const LinkApagar = styled(Link)`
   font-size: 15px;
   color: #de3b3b;
 `;
+
+export const ImageButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextButton = styled.text`
+  text-align: center;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 14px;
+  font-weight: bold;
+`;

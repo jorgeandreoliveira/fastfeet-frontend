@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input } from '@rocketseat/unform';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import DoneIcon from '@material-ui/icons/Done';
 import * as Yup from 'yup';
 import history from '../../../services/history';
 import api from '../../../services/api';
+import AvatarInput from './components/Avatar';
 
 import {
   Container,
@@ -12,6 +15,7 @@ import {
   ButtonVoltar,
   ButtonSalvar,
   List,
+  TextButton,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -78,48 +82,23 @@ export default class DeliveryManStore extends Component {
             <h1>Edição de entregadores</h1>
             <aside>
               <Profile>
-                <div>
-                  <ButtonVoltar
-                    onClick={() => history.push('/DeliveryManList')}
-                  >
-                    {'< Voltar'}
-                  </ButtonVoltar>
-                  <ButtonSalvar type="submit">Salvar</ButtonSalvar>
-                </div>
+                <ButtonVoltar onClick={() => history.push('/DeliveryManList')}>
+                  <KeyboardArrowLeftIcon />
+                  <TextButton>VOLTAR</TextButton>
+                </ButtonVoltar>
+                <ButtonSalvar type="submit">
+                  <DoneIcon />
+                  <TextButton>SALVAR</TextButton>
+                </ButtonSalvar>
               </Profile>
             </aside>
           </Content>
           <List>
-            <table>
-              <thead>
-                <tr>
-                  <td>
-                    <h1>Nome</h1>
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <Input name="name" initialdata={deliveryMan.name} />
-                  </td>
-                </tr>
-              </tbody>
-              <thead>
-                <tr>
-                  <td>
-                    <h1>Email</h1>
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <Input name="email" initialdata={deliveryMan.email} />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <AvatarInput name="avatar_id" />
+            <h1>Nome</h1>
+            <Input name="name" initialdata={deliveryMan.name} />
+            <h1>Email</h1>
+            <Input name="email" initialdata={deliveryMan.email} />
           </List>
         </Form>
       </Container>

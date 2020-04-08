@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form } from '@rocketseat/unform';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import DoneIcon from '@material-ui/icons/Done';
 import * as Yup from 'yup';
 import history from '../../../services/history';
 import api from '../../../services/api';
@@ -26,6 +28,7 @@ import {
   MiddleState,
   Right,
   RightZipCode,
+  TextButton,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -104,12 +107,14 @@ export default class RecipientStore extends Component {
             <h1>Edição de destinatário</h1>
             <aside>
               <Profile>
-                <div>
-                  <ButtonVoltar onClick={() => history.push('/RecipientList')}>
-                    {'< Voltar'}
-                  </ButtonVoltar>
-                  <ButtonSalvar type="submit">Salvar</ButtonSalvar>
-                </div>
+                <ButtonVoltar onClick={() => history.push('/RecipientList')}>
+                  <KeyboardArrowLeftIcon />
+                  <TextButton>VOLTAR</TextButton>
+                </ButtonVoltar>
+                <ButtonSalvar type="submit">
+                  <DoneIcon />
+                  <TextButton>SALVAR</TextButton>
+                </ButtonSalvar>
               </Profile>
             </aside>
           </Content>

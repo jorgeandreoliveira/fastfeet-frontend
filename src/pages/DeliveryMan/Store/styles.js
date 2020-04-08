@@ -25,10 +25,8 @@ export const Profile = styled.div`
   padding-left: 10px;
   align-items: center;
   justify-content: center;
-  div {
-    text-align: right;
-    margin-right: 200px;
-  }
+  text-align: right;
+  margin-right: 200px;
 `;
 
 export const ButtonVoltar = styled.button`
@@ -40,6 +38,9 @@ export const ButtonVoltar = styled.button`
   height: 36px;
   border-radius: 4px;
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const ButtonSalvar = styled.button`
@@ -50,6 +51,9 @@ export const ButtonSalvar = styled.button`
   width: 112px;
   height: 36px;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const List = styled.div`
@@ -94,4 +98,13 @@ export const Nome = styled(Input)`
   box-sizing: border-box;
   border-radius: 4px;
   margin-left: 30px;
+`;
+
+export const TextButton = styled.text`
+  text-align: center;
+  letter-spacing: 0px;
+  color: #ffffff;
+  opacity: 1;
+  font-size: 14px;
+  font-weight: bold;
 `;

@@ -38,7 +38,10 @@ export default class DeliveryProblemList extends Component {
           <td>{delivery_id < 10 ? `#0${delivery_id}` : `#${delivery_id}`}</td>
           <td>{deliveryProblem.description}</td>
           <td>
-            <Menu deliveryProblemDescription={deliveryProblem.description} />
+            <Menu
+              id={delivery_id}
+              deliveryProblemDescription={deliveryProblem.description}
+            />
           </td>
         </tr>
       );

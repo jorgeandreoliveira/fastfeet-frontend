@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
@@ -27,7 +28,6 @@ export default function SimpleMenu(props) {
   const [visible, setVisible] = React.useState(false);
 
   const { delivery } = props;
-  const { id } = props;
 
   const text = {
     color: '#999',
@@ -45,8 +45,10 @@ export default function SimpleMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDelete = deliveryId => {
-    api.delete(`/delivery/${deliveryId}`);
+  const handleDelete = () => {
+    const { id } = props.delivery;
+
+    api.delete(`/delivery/${id}`);
     window.location.reload(false);
   };
 
@@ -61,7 +63,7 @@ export default function SimpleMenu(props) {
       buttons: [
         {
           label: 'Sim',
-          onClick: () => handleDelete(`${id}`),
+          onClick: () => handleDelete(),
         },
         {
           label: 'Não',
@@ -139,6 +141,6 @@ export default function SimpleMenu(props) {
   );
 }
 
-// SimpleMenu.propTypes = {
-//   delivery: PropTypes.objectOf(PropTypes.object()),
-// };
+SimpleMenu.propTypes = {
+  id: PropTypes.number.isRequired,
+};

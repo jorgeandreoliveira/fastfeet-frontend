@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { Date } from 'date-fns;'
 import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
@@ -23,7 +24,7 @@ export default function SimpleMenu(props) {
   const [visible, setVisible] = React.useState(false);
 
   const { deliveryProblemDescription } = props;
-  const { id } = props;
+  // const { id } = props;
 
   function openModal() {
     setVisible(true);
@@ -37,8 +38,13 @@ export default function SimpleMenu(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleDelete = deliveryProblemId => {
-    api.delete(`/problem/:id/cancel-delivery/${deliveryProblemId}`);
+  const handleDelete = () => {
+    const { id } = props;
+
+    api.put(`/problem/${id}/cancel-delivery`, {
+      canceled_at: new Date(),
+    });
+
     window.location.reload(false);
   };
 
@@ -53,7 +59,7 @@ export default function SimpleMenu(props) {
       buttons: [
         {
           label: 'Sim',
-          onClick: () => handleDelete(`${id}`),
+          onClick: () => handleDelete(),
         },
         {
           label: 'Não',
