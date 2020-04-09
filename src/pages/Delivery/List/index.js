@@ -12,6 +12,9 @@ import {
   List,
   ImageButton,
   TextButton,
+  Rectangle,
+  Circle,
+  Status,
 } from './styles';
 
 let DELIVERIES_INITAL_STATE = [];
@@ -71,11 +74,20 @@ export default class DeliveryList extends Component {
     );
   }
 
+  // function SetStatus(props) {
+  //   const { status } = props.status;
+  //   if (status === 'ENTREGUE') return <Rectangle green>status</Rectangle>;
+  //   if (status === 'PENDENTE') return <Rectangle yellow>status</Rectangle>;
+  //   if (status === 'RETIRADA') return <Rectangle blue>status</Rectangle>;
+  //   if (status === 'CANCELADA') return <Rectangle red>status</Rectangle>;
+  // }
+
   renderTableData() {
     const { deliveries } = this.state;
 
     return deliveries.map(delivery => {
-      const { id } = delivery;
+      const { id, backgroundcolor, color } = delivery;
+
       return (
         <tr key={id}>
           <td>{id < 10 ? `#0${id}` : `#${id}`}</td>
@@ -83,7 +95,14 @@ export default class DeliveryList extends Component {
           <td>{delivery.DeliveryMan.name}</td>
           <td>{delivery.Recipient.city}</td>
           <td>{delivery.Recipient.state}</td>
-          <td>{delivery.status}</td>
+          <td>
+            <Status>
+              <Rectangle backgroundcolor={backgroundcolor} color={color}>
+                <Circle backgroundcolor={color} />
+                {delivery.status}
+              </Rectangle>
+            </Status>
+          </td>
           <td>
             <Menu delivery={delivery} />
           </td>

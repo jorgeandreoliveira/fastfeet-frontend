@@ -104,3 +104,29 @@ export const TextButton = styled.text`
   font-size: 14px;
   font-weight: bold;
 `;
+
+export const Rectangle = styled.div`
+  display: flex;
+  width: 118px;
+  height: 25px;
+  border-radius: 12px;
+  background-color: ${props => props.backgroundcolor};
+  color: ${props => props.color};
+  font-size: 14px;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Circle = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: ${props => props.backgroundcolor};
+  margin-right: 6px;
+`;
+
+export const Status = styled.div`
+  display: flex;
+  align-items: center;
+`;

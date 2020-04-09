@@ -12,28 +12,20 @@ export const Content = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 30px;
+  margin-left: 10px;
 
   nav {
     display: flex;
     align-items: center;
 
     img {
-      padding-right: 10px;
-    }
-
-    h1 {
-      color: #7d40e7;
-      font-size: 15px;
-      margin-right: 20px;
-      padding-right: 40px;
-      border-right: 1px solid #ddd;
+      padding-right: 26px;
     }
 
     a {
-      font-family: 'Roboto', sans-serif;
       font-size: 15px;
-      color: #444;
+      font-weight: bold;
+      color: #999;
       text-align: left;
       padding-left: 20px;
     }

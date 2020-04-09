@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { parseISO, format } from 'date-fns';
 import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
@@ -20,6 +21,7 @@ import {
   Data,
   ButtonDelete,
   MenuLink,
+  DataContainer,
 } from './styles';
 
 export default function SimpleMenu(props) {
@@ -28,6 +30,15 @@ export default function SimpleMenu(props) {
   const [visible, setVisible] = React.useState(false);
 
   const { delivery } = props;
+
+  let startDate;
+  let endDate;
+
+  if (delivery.start_date)
+    startDate = format(parseISO(delivery.start_date), "dd'/'MM'/'yyyy");
+
+  if (delivery.end_date)
+    endDate = format(parseISO(delivery.end_date), "dd'/'MM'/'yyyy");
 
   const text = {
     color: '#999',
@@ -130,10 +141,14 @@ export default function SimpleMenu(props) {
           </Data>
           <Data>{delivery.Recipient.zipcode}</Data>
           <Title>Datas</Title>
-          <SubTitle>Retirada:</SubTitle>
-          <Data>{delivery.start_date}</Data>
-          <SubTitle>Entrega:</SubTitle>
-          <Data>{delivery.end_date}</Data>
+          <DataContainer>
+            <SubTitle>Retirada:</SubTitle>
+            <Data>{startDate}</Data>
+          </DataContainer>
+          <DataContainer>
+            <SubTitle>Entrega:</SubTitle>
+            <Data>{endDate}</Data>
+          </DataContainer>
           <Title>Assinatura do destinatário</Title>
         </DivModal>
       </Modal>

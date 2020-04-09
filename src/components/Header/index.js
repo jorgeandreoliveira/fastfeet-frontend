@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { logout } from '../../services/auth';
 import { Container, Content, Profile, Separator } from './styles';
 import Logo from '../../pages/assets/headerlogo.png';
@@ -11,18 +11,30 @@ export default function Header() {
         <nav>
           <img src={Logo} alt="Logo" />
           <Separator />
-          <Link to="/DeliveryList">ENCOMENDAS</Link>
-          <Link to="/DeliveryManList">ENTREGADORES</Link>
-          <Link to="/RecipientList">DESTINATÁRIOS</Link>
-          <Link to="/DeliveryProblemList">PROBLEMAS</Link>
+          <NavLink activeStyle={{ color: '#444' }} exact to="/DeliveryList">
+            ENCOMENDAS
+          </NavLink>
+          <NavLink activeStyle={{ color: '#444' }} exact to="/DeliveryManList">
+            ENTREGADORES
+          </NavLink>
+          <NavLink activeStyle={{ color: '#444' }} exact to="/RecipientList">
+            DESTINATÁRIOS
+          </NavLink>
+          <NavLink
+            activeStyle={{ color: '#444' }}
+            exact
+            to="/DeliveryProblemList"
+          >
+            PROBLEMAS
+          </NavLink>
         </nav>
         <aside>
           <Profile>
             <div>
               <strong>Admin FastFeet</strong>
-              <Link to="/Login" onClick={() => logout()}>
+              <NavLink to="/Login" onClick={() => logout()}>
                 sair do sistema
-              </Link>
+              </NavLink>
             </div>
           </Profile>
         </aside>

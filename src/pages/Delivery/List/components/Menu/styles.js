@@ -52,6 +52,7 @@ export const Data = styledComponents.div`
   font-size: 16px;
   color: #666;
   padding-top: 5px;
+  padding-left: 2px;
 `;
 
 export const ButtonDelete = styledComponents.button`
@@ -68,4 +69,8 @@ export const MenuLink = styledComponents(Link)`
   font-size: 16px;
   padding-left: 2px;
   padding-bottom: 5px;
+`;
+
+export const DataContainer = styledComponents.div`
+  display: flex;
 `;
