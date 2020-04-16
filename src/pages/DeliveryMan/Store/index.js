@@ -23,6 +23,7 @@ const schema = Yup.object().shape({
   email: Yup.string()
     .email('Informe um e-mail válido')
     .required('e-mail é obrigatório'),
+  avatar_id: Yup.number().required('Avatar'),
 });
 
 export default class DeliveryManStore extends Component {
@@ -30,7 +31,9 @@ export default class DeliveryManStore extends Component {
     super(props);
     this.state = {
       deliveryMan: {},
+      avatar: {},
     };
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -43,7 +46,12 @@ export default class DeliveryManStore extends Component {
       this.setState({
         deliveryMan: response.data,
       });
+
+      this.setState({
+        avatar: this.state.deliveryMan.avatar,
+      });
     }
+    // console.log(this.state.deliveryMan.avatar);
   }
 
   async handleSubmit(data) {
@@ -71,6 +79,8 @@ export default class DeliveryManStore extends Component {
 
   render() {
     const { deliveryMan } = this.state;
+    const { avatar } = this.state;
+
     return (
       <Container>
         <Form
@@ -94,7 +104,7 @@ export default class DeliveryManStore extends Component {
             </aside>
           </Content>
           <List>
-            <AvatarInput name="avatar_id" />
+            <AvatarInput name="avatar_id" avatar={avatar} />
             <h1>Nome</h1>
             <Input name="name" initialdata={deliveryMan.name} />
             <h1>Email</h1>
