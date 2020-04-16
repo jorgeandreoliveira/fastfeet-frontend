@@ -16,6 +16,7 @@ import {
   ButtonSalvar,
   List,
   TextButton,
+  Avatar,
 } from './styles';
 
 const schema = Yup.object().shape({
@@ -104,7 +105,9 @@ export default class DeliveryManStore extends Component {
             </aside>
           </Content>
           <List>
-            <AvatarInput name="avatar_id" avatar={avatar} />
+            <Avatar>
+              <AvatarInput name="avatar_id" avatar={avatar} />
+            </Avatar>
             <h1>Nome</h1>
             <Input name="name" initialdata={deliveryMan.name} />
             <h1>Email</h1>

@@ -57,7 +57,7 @@ export const ButtonSalvar = styled.button`
 `;
 
 export const List = styled.div`
-  height: 307px;
+  height: 400px;
   width: 900px;
   background: #fff;
   border-radius: 4px;
@@ -107,4 +107,14 @@ export const TextButton = styled.text`
   opacity: 1;
   font-size: 14px;
   font-weight: bold;
+`;
+
+export const Avatar = styled.div`
+  display: flex;
+  /* margin-left: 10px; */
+  padding-top: 30px;
+  align-items: center;
+  justify-content: center;
+  /* text-align: right; */
+  /* margin-right: 200px; */
 `;
