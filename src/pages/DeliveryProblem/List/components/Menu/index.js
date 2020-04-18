@@ -23,7 +23,6 @@ export default function SimpleMenu(props) {
   const [visible, setVisible] = React.useState(false);
 
   const { deliveryProblemDescription } = props;
-  // const { id } = props;
 
   function openModal() {
     setVisible(true);

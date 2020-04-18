@@ -74,14 +74,6 @@ export default class DeliveryList extends Component {
     );
   }
 
-  // function SetStatus(props) {
-  //   const { status } = props.status;
-  //   if (status === 'ENTREGUE') return <Rectangle green>status</Rectangle>;
-  //   if (status === 'PENDENTE') return <Rectangle yellow>status</Rectangle>;
-  //   if (status === 'RETIRADA') return <Rectangle blue>status</Rectangle>;
-  //   if (status === 'CANCELADA') return <Rectangle red>status</Rectangle>;
-  // }
-
   renderTableData() {
     const { deliveries } = this.state;
 

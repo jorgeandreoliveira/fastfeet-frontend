@@ -3,8 +3,6 @@ import { useField } from '@rocketseat/unform';
 import ReactInputMask from 'react-input-mask';
 import PropTypes from 'prop-types';
 
-// import { InputGroup } from '../Input/styles';
-
 export default function InputMask({ name, label, ...rest }) {
   const inputRef = useRef(null);
   const { fieldName, defaultValue = '', registerField, error } = useField(name);

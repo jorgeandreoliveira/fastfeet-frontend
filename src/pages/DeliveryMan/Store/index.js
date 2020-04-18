@@ -52,7 +52,6 @@ export default class DeliveryManStore extends Component {
         avatar: this.state.deliveryMan.avatar,
       });
     }
-    // console.log(this.state.deliveryMan.avatar);
   }
 
   async handleSubmit(data) {

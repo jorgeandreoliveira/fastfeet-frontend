@@ -16,7 +16,6 @@ export const Titulo = styled.div`
   height: 64px;
   display: flex;
   align-items: center;
-  // margin-left: 120px;
 
     h1 {
       color: #444444;

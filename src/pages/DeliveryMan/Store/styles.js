@@ -111,10 +111,7 @@ export const TextButton = styled.text`
 
 export const Avatar = styled.div`
   display: flex;
-  /* margin-left: 10px; */
   padding-top: 30px;
   align-items: center;
   justify-content: center;
-  /* text-align: right; */
-  /* margin-right: 200px; */
 `;
