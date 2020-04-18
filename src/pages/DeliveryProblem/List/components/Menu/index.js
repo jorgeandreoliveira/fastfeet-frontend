@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { Date } from 'date-fns;'
 import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import Modal from 'react-awesome-modal';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import api from '../../../../../services/api';
+import api from '~/services/api';
 import {
   MoreButton,
   CustomVisibilityIcon,

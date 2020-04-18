@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useField } from '@rocketseat/unform';
-import api from '../../../../../services/api';
+import api from '~/services/api';
 import { Container } from './styles';
 
 export default function AvatarInput(props) {
   const { defaultValue, registerField } = useField('avatar');
-  // console.log(props.avatar.url);
 
   const { avatar } = props;
 
@@ -22,7 +21,7 @@ export default function AvatarInput(props) {
         path: 'dataset.file',
       });
     }
-  }, [ref]); // eslint-disable-line
+  }, [ref]);
 
   async function handleChange(e) {
     const data = new FormData();

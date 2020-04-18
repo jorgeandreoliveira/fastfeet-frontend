@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { logout } from '../../services/auth';
+import { logout } from '~/services/auth';
 import { Container, Content, Profile, Separator } from './styles';
-import Logo from '../../pages/assets/headerlogo.png';
+import Logo from '~/pages/assets/headerlogo.png';
 
 export default function Header() {
   return (

@@ -4,8 +4,8 @@ import { Form, Input, Select } from '@rocketseat/unform';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import DoneIcon from '@material-ui/icons/Done';
 import * as Yup from 'yup';
-import history from '../../../services/history';
-import api from '../../../services/api';
+import history from '~/services/history';
+import api from '~/services/api';
 
 import {
   Container,

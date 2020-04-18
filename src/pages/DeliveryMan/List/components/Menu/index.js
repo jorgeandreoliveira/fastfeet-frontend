@@ -4,7 +4,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import api from '../../../../../services/api';
+import api from '~/services/api';
 import {
   MoreButton,
   CustomEditIcon,

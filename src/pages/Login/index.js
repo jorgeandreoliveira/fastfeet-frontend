@@ -1,9 +1,9 @@
 import React from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
-import api from '../../services/api';
-import history from '../../services/history';
-import { login } from '../../services/auth';
+import api from '~/services/api';
+import history from '~/services/history';
+import { login } from '~/services/auth';
 
 import Logo from '../assets/logo.png';
 

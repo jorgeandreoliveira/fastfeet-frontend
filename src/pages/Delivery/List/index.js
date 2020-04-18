@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddIcon from '@material-ui/icons/Add';
-import api from '../../../services/api';
-import history from '../../../services/history';
+import api from '~/services/api';
+import history from '~/services/history';
 import Icon from '../../assets/search.png';
 import Menu from './components/Menu';
 import {

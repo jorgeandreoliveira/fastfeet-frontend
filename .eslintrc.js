@@ -37,4 +37,11 @@ module.exports = {
     'camelcase': 'off',
     'react/require-default-props': [0, { forbidDefaultForRequired: true, ignoreFunctionalComponents: true }],
   },
+  settings: {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        rootPathSuffix: "src"
+      },
+    },
+  },
 };

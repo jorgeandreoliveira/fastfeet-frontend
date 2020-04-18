@@ -4,8 +4,8 @@ import { Form } from '@rocketseat/unform';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import DoneIcon from '@material-ui/icons/Done';
 import * as Yup from 'yup';
-import history from '../../../services/history';
-import api from '../../../services/api';
+import history from '~/services/history';
+import api from '~/services/api';
 
 import {
   Container,
@@ -153,7 +153,6 @@ export default class RecipientStore extends Component {
                 <h1>CEP</h1>
                 <div>
                   <InputZipCode
-                    // mask={[/\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
                     name="zipcode"
                     initialdata={recipient.zipcode}
                   />

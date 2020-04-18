@@ -7,7 +7,7 @@ import Modal from 'react-awesome-modal';
 import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import api from '../../../../../services/api';
+import api from '~/services/api';
 
 import {
   Container,
@@ -150,6 +150,12 @@ export default function SimpleMenu(props) {
             <Data>{endDate}</Data>
           </DataContainer>
           <Title>Assinatura do destinatário</Title>
+          {delivery.signature && (
+            <img
+              src={delivery.signature.url}
+              alt="Assinatura do destinatário"
+            />
+          )}
         </DivModal>
       </Modal>
     </Container>

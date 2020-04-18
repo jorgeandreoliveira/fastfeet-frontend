@@ -33,6 +33,14 @@ export const CustomDeleteIcon = styled(DeleteIcon)({
 export const DivModal = styledComponents.div`
   padding-left: 25px;
   padding-top: 25px;
+
+  img {
+    margin: 15px 0;
+    text-align: center;
+    width: 250px;
+    height: 36px;
+    align-self: center;
+  }
 `;
 
 export const Title = styledComponents.div`
